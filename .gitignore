@@ -1,0 +1,17 @@
+.coverage
+.env
+.env.*
+.tmp/
+.uv-cache/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.venv/
+.wheel-smoke/
+wheel-smoke/
+__pycache__/
+*.pyc
+*.pyo
+build/
+dist/
+*.egg-info/

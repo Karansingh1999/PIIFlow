@@ -1,0 +1,10 @@
+version: 1
+default_action: deny
+rules:
+  - id: require-email-redaction
+    description: Email requires redact_email before external OpenAI use.
+    categories: [EMAIL]
+    providers: [openai]
+    trust_zones: [external]
+    action: require_sanitizer
+    sanitizers: [redact_email]

@@ -1,0 +1,101 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "piiflow"
+version = "0.3.0"
+description = "Policy-aware static taint analysis for Python LLM applications"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Apache-2.0" }
+license-files = ["LICENSE"]
+authors = [{ name = "Karan Kumar Singh" }]
+keywords = [
+  "ai-security",
+  "data-flow",
+  "llm-security",
+  "privacy",
+  "python-ast",
+  "static-analysis",
+  "taint-analysis",
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Information Technology",
+  "License :: OSI Approved :: Apache Software License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Security",
+  "Topic :: Software Development :: Quality Assurance",
+]
+dependencies = [
+  "pydantic>=2.7",
+  "pyyaml>=6.0",
+  "rich>=13.7",
+  "typer>=0.12",
+]
+
+[project.optional-dependencies]
+dev = [
+  "hypothesis>=6.100",
+  "mypy>=1.10",
+  "pytest>=8.2",
+  "pytest-cov>=5.0",
+  "ruff>=0.5",
+  "types-PyYAML>=6.0",
+]
+
+[project.scripts]
+piiflow = "piiflow.cli:app"
+
+[tool.hatch.build]
+exclude = [
+  "/.coverage",
+  "/.tmp",
+  "/.uv-cache",
+  "/.mypy_cache",
+  "/.pytest_cache",
+  "/.ruff_cache",
+  "/.venv",
+  "/benchmarks/results",
+  "/build",
+  "/dist",
+  "/wheel-smoke",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/piiflow"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"src/piiflow/rules/default.yaml" = "piiflow/rules/default.yaml"
+"src/piiflow/py.typed" = "piiflow/py.typed"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "C4", "SIM"]
+
+[tool.ruff.lint.per-file-ignores]
+"benchmarks/cases/**/*.py" = ["B009", "F821", "F841", "I001"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_unreachable = true
+mypy_path = "src"
+exclude = ["benchmarks/cases", "benchmarks/policy_cases"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+pythonpath = ["src", "."]

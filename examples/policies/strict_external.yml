@@ -1,0 +1,15 @@
+version: 1
+default_action: allow
+rules:
+  - id: deny-medical-external
+    description: Medical data cannot leave the organization.
+    categories: [MEDICAL]
+    providers: ["*"]
+    trust_zones: [external]
+    action: deny
+  - id: deny-all-external
+    description: Sensitive data cannot cross an external trust boundary.
+    categories: ["*"]
+    providers: ["*"]
+    trust_zones: [external]
+    action: deny

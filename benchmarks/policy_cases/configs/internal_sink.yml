@@ -1,0 +1,8 @@
+version: 1
+sink_patterns:
+  - id: internal-generate
+    call: "*.internal_model.generate"
+    arguments: ["input"]
+    destination: internal_llm
+    provider: generic
+    trust_zone: internal

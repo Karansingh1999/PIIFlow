@@ -1,0 +1,1207 @@
+version: 1
+cases:
+- id: challenge_attribute_storage_vulnerable_002
+  path: cases/challenge/challenge_attribute_storage_vulnerable_002.py
+  partition: challenge
+  family: object_attribute_storage
+  description: Email stored on an object attribute reaches a sink.
+  expected:
+    vulnerable: true
+    categories:
+    - EMAIL
+    minimum_unsanitized_findings: 1
+  tags:
+  - attribute
+  - openai
+  - email
+- id: challenge_closure_vulnerable_009
+  path: cases/challenge/challenge_closure_vulnerable_009.py
+  partition: challenge
+  family: closure
+  description: Nested closure captures and returns email.
+  expected:
+    vulnerable: true
+    categories:
+    - EMAIL
+    minimum_unsanitized_findings: 1
+  tags:
+  - closure
+  - openai
+  - email
+- id: challenge_collection_alias_safe_011
+  path: cases/challenge/challenge_collection_alias_safe_011.py
+  partition: challenge
+  family: complex_collection_aliasing
+  description: A tainted list alias is overwritten with public content before sink.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - collection_alias
+  - openai
+  - email
+- id: challenge_decorator_sanitizes_safe_008
+  path: cases/challenge/challenge_decorator_sanitizes_safe_008.py
+  partition: challenge
+  family: decorator_modified_behavior
+  description: Runtime decorator sanitizes helper output before sink.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - decorator
+  - openai
+  - email
+- id: challenge_dependency_helper_vulnerable_012
+  path: cases/challenge/challenge_dependency_helper_vulnerable_012.py
+  partition: challenge
+  family: dependency_defined_helper
+  description: External dependency helper propagates medical history.
+  expected:
+    vulnerable: true
+    categories:
+    - MEDICAL
+    minimum_unsanitized_findings: 1
+  tags:
+  - dependency
+  - openai
+  - medical
+- id: challenge_dict_field_safe_001
+  path: cases/challenge/challenge_dict_field_safe_001.py
+  partition: challenge
+  family: field_sensitive_dictionary
+  description: Only a public dictionary field reaches the sink.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - dict
+  - openai
+  - email
+- id: challenge_dynamic_attribute_vulnerable_016
+  path: cases/challenge/challenge_dynamic_attribute_vulnerable_016.py
+  partition: challenge
+  family: dynamic_attribute_access
+  description: Sensitive field is read with getattr using a dynamic attribute name.
+  expected:
+    vulnerable: true
+    categories:
+    - PHONE
+    minimum_unsanitized_findings: 1
+  tags:
+  - dynamic_attribute
+  - openai
+  - phone
+- id: challenge_dynamic_import_vulnerable_006
+  path: cases/challenge/challenge_dynamic_import_vulnerable_006.py
+  partition: challenge
+  family: dynamic_import
+  description: Dynamically imported helper sends email to a sink.
+  expected:
+    vulnerable: true
+    categories:
+    - EMAIL
+    minimum_unsanitized_findings: 1
+  tags:
+  - dynamic_import
+  - openai
+  - email
+- id: challenge_dynamic_sink_vulnerable_005
+  path: cases/challenge/challenge_dynamic_sink_vulnerable_005.py
+  partition: challenge
+  family: dynamic_sink_construction
+  description: Sink function is stored dynamically before being called.
+  expected:
+    vulnerable: true
+    categories:
+    - MEDICAL
+    minimum_unsanitized_findings: 1
+  tags:
+  - dynamic_sink
+  - openai
+  - medical
+- id: challenge_exception_flow_vulnerable_017
+  path: cases/challenge/challenge_exception_flow_vulnerable_017.py
+  partition: challenge
+  family: exception_flow
+  description: Sensitive prompt is assigned in an exception handler.
+  expected:
+    vulnerable: true
+    categories:
+    - GOVERNMENT_ID
+    minimum_unsanitized_findings: 1
+  tags:
+  - exception
+  - openai
+  - government_id
+- id: challenge_framework_value_vulnerable_015
+  path: cases/challenge/challenge_framework_value_vulnerable_015.py
+  partition: challenge
+  family: framework_generated_value
+  description: Framework current_user email reaches a sink without a request source
+    expression.
+  expected:
+    vulnerable: true
+    categories:
+    - EMAIL
+    minimum_unsanitized_findings: 1
+  tags:
+  - framework
+  - openai
+  - email
+- id: challenge_generator_vulnerable_010
+  path: cases/challenge/challenge_generator_vulnerable_010.py
+  partition: challenge
+  family: generator_flow
+  description: Generator yields a financial value that reaches a sink.
+  expected:
+    vulnerable: true
+    categories:
+    - FINANCIAL
+    minimum_unsanitized_findings: 1
+  tags:
+  - generator
+  - openai
+  - financial
+- id: challenge_implicit_control_vulnerable_004
+  path: cases/challenge/challenge_implicit_control_vulnerable_004.py
+  partition: challenge
+  family: implicit_control_flow
+  description: Sensitive email controls whether a private marker is sent.
+  expected:
+    vulnerable: true
+    categories:
+    - EMAIL
+    minimum_unsanitized_findings: 1
+  tags:
+  - implicit
+  - openai
+  - email
+- id: challenge_nested_function_vulnerable_018
+  path: cases/challenge/challenge_nested_function_vulnerable_018.py
+  partition: challenge
+  family: nested_function_complexity
+  description: Nested function returns a captured email.
+  expected:
+    vulnerable: true
+    categories:
+    - EMAIL
+    minimum_unsanitized_findings: 1
+  tags:
+  - nested_function
+  - openai
+  - email
+- id: challenge_polymorphic_method_vulnerable_013
+  path: cases/challenge/challenge_polymorphic_method_vulnerable_013.py
+  partition: challenge
+  family: unresolved_polymorphic_method
+  description: Runtime builder can dispatch to a propagating method.
+  expected:
+    vulnerable: true
+    categories:
+    - LOCATION
+    minimum_unsanitized_findings: 1
+  tags:
+  - polymorphic
+  - openai
+  - location
+- id: challenge_reflection_helper_vulnerable_007
+  path: cases/challenge/challenge_reflection_helper_vulnerable_007
+  partition: challenge
+  family: reflection
+  description: Helper function is selected through getattr.
+  expected:
+    vulnerable: true
+    categories:
+    - PHONE
+    minimum_unsanitized_findings: 1
+  tags:
+  - reflection
+  - openai
+  - phone
+- id: challenge_request_alias_vulnerable_003
+  path: cases/challenge/challenge_request_alias_vulnerable_003.py
+  partition: challenge
+  family: request_alias
+  description: Request JSON collection alias is used to read email.
+  expected:
+    vulnerable: true
+    categories:
+    - EMAIL
+    minimum_unsanitized_findings: 1
+  tags:
+  - request_alias
+  - openai
+  - email
+- id: challenge_runtime_target_safe_014
+  path: cases/challenge/challenge_runtime_target_safe_014.py
+  partition: challenge
+  family: multiple_runtime_targets
+  description: Runtime selects the safe target though another class has the same method
+    name.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - polymorphic
+  - openai
+  - email
+- id: in_scope_ambiguous_call_conservative_028
+  path: cases/in_scope/in_scope_ambiguous_call_conservative_028
+  partition: in_scope
+  family: ambiguous_call
+  description: Ambiguous helper call is treated conservatively.
+  expected:
+    vulnerable: true
+    categories:
+    - EMAIL
+    minimum_unsanitized_findings: 1
+  tags:
+  - ambiguous
+  - openai
+  - email
+- id: in_scope_ambiguous_public_safe_061
+  path: cases/in_scope/in_scope_ambiguous_public_safe_061
+  partition: in_scope
+  family: ambiguous_call
+  description: Ambiguous helper receives public input only.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - ambiguous
+  - openai
+- id: in_scope_annotated_medical_anthropic_006
+  path: cases/in_scope/in_scope_annotated_medical_anthropic_006.py
+  partition: in_scope
+  family: annotated_assignment
+  description: Annotated medical value reaches Anthropic Messages.
+  expected:
+    vulnerable: true
+    categories:
+    - MEDICAL
+    minimum_unsanitized_findings: 1
+  tags:
+  - annotated
+  - anthropic
+  - medical
+- id: in_scope_annotated_public_safe_065
+  path: cases/in_scope/in_scope_annotated_public_safe_065.py
+  partition: in_scope
+  family: annotated_assignment
+  description: Annotated public value reaches OpenAI Responses.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - annotated
+  - openai
+- id: in_scope_anthropic_phone_030
+  path: cases/in_scope/in_scope_anthropic_phone_030.py
+  partition: in_scope
+  family: anthropic_messages
+  description: Phone reaches Anthropic Messages.
+  expected:
+    vulnerable: true
+    categories:
+    - PHONE
+    minimum_unsanitized_findings: 1
+  tags:
+  - anthropic
+  - phone
+- id: in_scope_anthropic_public_safe_063
+  path: cases/in_scope/in_scope_anthropic_public_safe_063.py
+  partition: in_scope
+  family: anthropic_messages
+  description: Anthropic Messages receives public content.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - anthropic
+- id: in_scope_args_phone_033
+  path: cases/in_scope/in_scope_args_phone_033.py
+  partition: in_scope
+  family: request_args
+  description: Phone from request args reaches OpenAI Responses.
+  expected:
+    vulnerable: true
+    categories:
+    - PHONE
+    minimum_unsanitized_findings: 1
+  tags:
+  - request_args
+  - openai
+  - phone
+- id: in_scope_args_public_safe_046
+  path: cases/in_scope/in_scope_args_public_safe_046.py
+  partition: in_scope
+  family: request_args
+  description: Non-sensitive request args field reaches OpenAI Responses.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - request_args
+  - openai
+- id: in_scope_assignment_financial_chat_005
+  path: cases/in_scope/in_scope_assignment_financial_chat_005.py
+  partition: in_scope
+  family: assignment
+  description: Financial account number assigned to a variable reaches OpenAI Chat
+    messages.
+  expected:
+    vulnerable: true
+    categories:
+    - FINANCIAL
+    minimum_unsanitized_findings: 1
+  tags:
+  - assignment
+  - openai
+  - financial
+- id: in_scope_async_medical_020
+  path: cases/in_scope/in_scope_async_medical_020.py
+  partition: in_scope
+  family: async_function
+  description: Async handler sends medical diagnosis to OpenAI Responses.
+  expected:
+    vulnerable: true
+    categories:
+    - MEDICAL
+    minimum_unsanitized_findings: 1
+  tags:
+  - async
+  - openai
+  - medical
+- id: in_scope_async_redacted_safe_053
+  path: cases/in_scope/in_scope_async_redacted_safe_053.py
+  partition: in_scope
+  family: async_function
+  description: Async handler redacts email before sink.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - async
+  - sanitizer
+  - openai
+  - email
+- id: in_scope_await_email_021
+  path: cases/in_scope/in_scope_await_email_021.py
+  partition: in_scope
+  family: await_sink
+  description: Awaited OpenAI Responses call receives email.
+  expected:
+    vulnerable: true
+    categories:
+    - EMAIL
+    minimum_unsanitized_findings: 1
+  tags:
+  - await
+  - openai
+  - email
+- id: in_scope_await_public_safe_054
+  path: cases/in_scope/in_scope_await_public_safe_054.py
+  partition: in_scope
+  family: await_sink
+  description: Awaited sink receives public data.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - await
+  - openai
+- id: in_scope_base64_financial_015
+  path: cases/in_scope/in_scope_base64_financial_015.py
+  partition: in_scope
+  family: encoding
+  description: Base64-encoding a card number does not sanitize it.
+  expected:
+    vulnerable: true
+    categories:
+    - FINANCIAL
+    minimum_unsanitized_findings: 1
+  tags:
+  - base64
+  - openai
+  - financial
+- id: in_scope_base64_public_safe_052
+  path: cases/in_scope/in_scope_base64_public_safe_052.py
+  partition: in_scope
+  family: encoding
+  description: Base64 encoding public data reaches OpenAI Responses.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - base64
+  - openai
+- id: in_scope_class_method_government_024
+  path: cases/in_scope/in_scope_class_method_government_024.py
+  partition: in_scope
+  family: method_binding
+  description: Class method propagates Aadhaar after cls binding.
+  expected:
+    vulnerable: true
+    categories:
+    - GOVERNMENT_ID
+    minimum_unsanitized_findings: 1
+  tags:
+  - classmethod
+  - openai
+  - government_id
+- id: in_scope_classmethod_public_safe_057
+  path: cases/in_scope/in_scope_classmethod_public_safe_057.py
+  partition: in_scope
+  family: method_binding
+  description: Class method receives public text only.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - classmethod
+  - openai
+- id: in_scope_concat_phone_008
+  path: cases/in_scope/in_scope_concat_phone_008.py
+  partition: in_scope
+  family: concatenation
+  description: Phone value concatenated into a prompt reaches OpenAI Responses.
+  expected:
+    vulnerable: true
+    categories:
+    - PHONE
+    minimum_unsanitized_findings: 1
+  tags:
+  - concat
+  - openai
+  - phone
+- id: in_scope_conditional_email_012
+  path: cases/in_scope/in_scope_conditional_email_012.py
+  partition: in_scope
+  family: conditional_expression
+  description: Email selected by a conditional expression reaches OpenAI Responses.
+  expected:
+    vulnerable: true
+    categories:
+    - EMAIL
+    minimum_unsanitized_findings: 1
+  tags:
+  - conditional
+  - openai
+  - email
+- id: in_scope_dict_location_anthropic_011
+  path: cases/in_scope/in_scope_dict_location_anthropic_011.py
+  partition: in_scope
+  family: container
+  description: Home address in a dictionary reaches Anthropic Messages.
+  expected:
+    vulnerable: true
+    categories:
+    - LOCATION
+    minimum_unsanitized_findings: 1
+  tags:
+  - dict
+  - anthropic
+  - location
+- id: in_scope_dict_public_safe_068
+  path: cases/in_scope/in_scope_dict_public_safe_068.py
+  partition: in_scope
+  family: container
+  description: Dictionary contains only public data.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - dict
+  - anthropic
+- id: in_scope_direct_args_location_003
+  path: cases/in_scope/in_scope_direct_args_location_003.py
+  partition: in_scope
+  family: direct_request_subscript
+  description: Direct postal address from request args reaches OpenAI Responses input.
+  expected:
+    vulnerable: true
+    categories:
+    - LOCATION
+    minimum_unsanitized_findings: 1
+  tags:
+  - request_args
+  - direct
+  - openai
+  - location
+- id: in_scope_direct_form_phone_002
+  path: cases/in_scope/in_scope_direct_form_phone_002.py
+  partition: in_scope
+  family: direct_request_subscript
+  description: Direct phone number from request form reaches OpenAI Responses input.
+  expected:
+    vulnerable: true
+    categories:
+    - PHONE
+    minimum_unsanitized_findings: 1
+  tags:
+  - request_form
+  - direct
+  - openai
+  - phone
+- id: in_scope_direct_json_email_001
+  path: cases/in_scope/in_scope_direct_json_email_001.py
+  partition: in_scope
+  family: direct_request_subscript
+  description: Direct email from request JSON reaches OpenAI Responses input.
+  expected:
+    vulnerable: true
+    categories:
+    - EMAIL
+    minimum_unsanitized_findings: 1
+  tags:
+  - request_json
+  - direct
+  - openai
+  - email
+- id: in_scope_email_enabled_safe_039
+  path: cases/in_scope/in_scope_email_enabled_safe_039.py
+  partition: in_scope
+  family: sensitive_looking_name
+  description: Harmless email_enabled boolean reaches OpenAI Responses.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - sensitive_looking
+  - openai
+- id: in_scope_explicit_import_email_025
+  path: cases/in_scope/in_scope_explicit_import_email_025
+  partition: in_scope
+  family: import_resolution
+  description: Explicitly imported helper propagates email.
+  expected:
+    vulnerable: true
+    categories:
+    - EMAIL
+    minimum_unsanitized_findings: 1
+  tags:
+  - import
+  - openai
+  - email
+- id: in_scope_financial_masked_safe_071
+  path: cases/in_scope/in_scope_financial_masked_safe_071.py
+  partition: in_scope
+  family: sanitizer
+  description: Account number is masked before OpenAI Responses.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - sanitizer
+  - openai
+  - financial
+- id: in_scope_form_email_032
+  path: cases/in_scope/in_scope_form_email_032.py
+  partition: in_scope
+  family: request_form
+  description: Email from request form reaches OpenAI Responses.
+  expected:
+    vulnerable: true
+    categories:
+    - EMAIL
+    minimum_unsanitized_findings: 1
+  tags:
+  - request_form
+  - openai
+  - email
+- id: in_scope_form_public_safe_045
+  path: cases/in_scope/in_scope_form_public_safe_045.py
+  partition: in_scope
+  family: request_form
+  description: Non-sensitive request form field reaches OpenAI Responses.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - request_form
+  - openai
+- id: in_scope_fstring_email_007
+  path: cases/in_scope/in_scope_fstring_email_007.py
+  partition: in_scope
+  family: fstring
+  description: Email embedded in an f-string reaches OpenAI Responses.
+  expected:
+    vulnerable: true
+    categories:
+    - EMAIL
+    minimum_unsanitized_findings: 1
+  tags:
+  - fstring
+  - openai
+  - email
+- id: in_scope_generic_medical_031
+  path: cases/in_scope/in_scope_generic_medical_031.py
+  partition: in_scope
+  family: generic_invoke
+  description: Medical record reaches a generic invoke sink.
+  expected:
+    vulnerable: true
+    categories:
+    - MEDICAL
+    minimum_unsanitized_findings: 1
+  tags:
+  - generic
+  - medical
+- id: in_scope_generic_public_safe_064
+  path: cases/in_scope/in_scope_generic_public_safe_064.py
+  partition: in_scope
+  family: generic_invoke
+  description: Generic invoke receives public data.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - generic
+- id: in_scope_get_json_government_004
+  path: cases/in_scope/in_scope_get_json_government_004.py
+  partition: in_scope
+  family: get_source
+  description: Government identifier extracted with get reaches OpenAI Responses input.
+  expected:
+    vulnerable: true
+    categories:
+    - GOVERNMENT_ID
+    minimum_unsanitized_findings: 1
+  tags:
+  - get
+  - openai
+  - government_id
+- id: in_scope_get_public_safe_047
+  path: cases/in_scope/in_scope_get_public_safe_047.py
+  partition: in_scope
+  family: get_source
+  description: Non-sensitive get key reaches OpenAI Responses.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - get
+  - openai
+- id: in_scope_government_redacted_safe_070
+  path: cases/in_scope/in_scope_government_redacted_safe_070.py
+  partition: in_scope
+  family: sanitizer
+  description: SSN is redacted before a generic invoke sink.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - sanitizer
+  - generic
+  - government_id
+- id: in_scope_hashing_financial_014
+  path: cases/in_scope/in_scope_hashing_financial_014.py
+  partition: in_scope
+  family: hashing
+  description: Hashing salary does not sanitize it before OpenAI Chat.
+  expected:
+    vulnerable: true
+    categories:
+    - FINANCIAL
+    minimum_unsanitized_findings: 1
+  tags:
+  - hashing
+  - openai
+  - financial
+- id: in_scope_hashing_public_safe_051
+  path: cases/in_scope/in_scope_hashing_public_safe_051.py
+  partition: in_scope
+  family: hashing
+  description: Hashing public data reaches OpenAI Responses.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - hashing
+  - openai
+- id: in_scope_helper_constant_safe_041
+  path: cases/in_scope/in_scope_helper_constant_safe_041.py
+  partition: in_scope
+  family: interprocedural
+  description: Helper receiving email returns a public constant.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - helper
+  - openai
+  - email
+- id: in_scope_helper_email_016
+  path: cases/in_scope/in_scope_helper_email_016.py
+  partition: in_scope
+  family: interprocedural
+  description: Email flows through a project-local helper function.
+  expected:
+    vulnerable: true
+    categories:
+    - EMAIL
+    minimum_unsanitized_findings: 1
+  tags:
+  - helper
+  - openai
+  - email
+- id: in_scope_import_alias_constant_safe_059
+  path: cases/in_scope/in_scope_import_alias_constant_safe_059
+  partition: in_scope
+  family: import_resolution
+  description: Aliased imported helper receiving email returns public text.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - import_alias
+  - openai
+  - email
+- id: in_scope_import_alias_email_026
+  path: cases/in_scope/in_scope_import_alias_email_026
+  partition: in_scope
+  family: import_resolution
+  description: Imported module alias propagates email.
+  expected:
+    vulnerable: true
+    categories:
+    - EMAIL
+    minimum_unsanitized_findings: 1
+  tags:
+  - import_alias
+  - openai
+  - email
+- id: in_scope_import_helper_constant_safe_058
+  path: cases/in_scope/in_scope_import_helper_constant_safe_058
+  partition: in_scope
+  family: import_resolution
+  description: Imported helper receiving email returns public text.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - import
+  - openai
+  - email
+- id: in_scope_instance_constant_safe_055
+  path: cases/in_scope/in_scope_instance_constant_safe_055.py
+  partition: in_scope
+  family: method_binding
+  description: Instance method receiving email returns a public constant.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - instance_method
+  - openai
+  - email
+- id: in_scope_instance_method_email_022
+  path: cases/in_scope/in_scope_instance_method_email_022.py
+  partition: in_scope
+  family: method_binding
+  description: Instance method propagates email after self binding.
+  expected:
+    vulnerable: true
+    categories:
+    - EMAIL
+    minimum_unsanitized_findings: 1
+  tags:
+  - instance_method
+  - openai
+  - email
+- id: in_scope_keyword_helper_location_019
+  path: cases/in_scope/in_scope_keyword_helper_location_019.py
+  partition: in_scope
+  family: keyword_argument
+  description: Location flows through a helper by keyword argument.
+  expected:
+    vulnerable: true
+    categories:
+    - LOCATION
+    minimum_unsanitized_findings: 1
+  tags:
+  - keyword
+  - openai
+  - location
+- id: in_scope_list_medical_chat_009
+  path: cases/in_scope/in_scope_list_medical_chat_009.py
+  partition: in_scope
+  family: container
+  description: Medical history in a list reaches OpenAI Chat messages.
+  expected:
+    vulnerable: true
+    categories:
+    - MEDICAL
+    minimum_unsanitized_findings: 1
+  tags:
+  - list
+  - openai
+  - medical
+- id: in_scope_list_public_sensitive_local_safe_066
+  path: cases/in_scope/in_scope_list_public_sensitive_local_safe_066.py
+  partition: in_scope
+  family: container
+  description: Sensitive value is read but a public list is sent.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - list
+  - openai
+  - email
+- id: in_scope_location_anonymized_safe_072
+  path: cases/in_scope/in_scope_location_anonymized_safe_072.py
+  partition: in_scope
+  family: sanitizer
+  description: Home address is anonymized before Anthropic Messages.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - sanitizer
+  - anthropic
+  - location
+- id: in_scope_masked_phone_safe_043
+  path: cases/in_scope/in_scope_masked_phone_safe_043.py
+  partition: in_scope
+  family: sanitizer
+  description: Phone is masked before Anthropic Messages.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - sanitizer
+  - anthropic
+  - phone
+- id: in_scope_multi_category_034
+  path: cases/in_scope/in_scope_multi_category_034.py
+  partition: in_scope
+  family: multiple_categories
+  description: Email and diagnosis independently reach OpenAI Responses.
+  expected:
+    vulnerable: true
+    categories:
+    - EMAIL
+    - MEDICAL
+    minimum_unsanitized_findings: 2
+  tags:
+  - multiple_categories
+  - openai
+  - email
+  - medical
+- id: in_scope_openai_chat_financial_029
+  path: cases/in_scope/in_scope_openai_chat_financial_029.py
+  partition: in_scope
+  family: openai_chat
+  description: Financial salary reaches OpenAI Chat messages.
+  expected:
+    vulnerable: true
+    categories:
+    - FINANCIAL
+    minimum_unsanitized_findings: 1
+  tags:
+  - openai
+  - chat
+  - financial
+- id: in_scope_openai_chat_public_safe_062
+  path: cases/in_scope/in_scope_openai_chat_public_safe_062.py
+  partition: in_scope
+  family: openai_chat
+  description: OpenAI Chat receives public messages.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - openai
+  - chat
+- id: in_scope_passport_required_safe_069
+  path: cases/in_scope/in_scope_passport_required_safe_069.py
+  partition: in_scope
+  family: sensitive_looking_name
+  description: Harmless passport_required boolean reaches OpenAI Responses.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - sensitive_looking
+  - openai
+- id: in_scope_positional_invoke_financial_036
+  path: cases/in_scope/in_scope_positional_invoke_financial_036.py
+  partition: in_scope
+  family: generic_invoke
+  description: Card number reaches positional generic invoke.
+  expected:
+    vulnerable: true
+    categories:
+    - FINANCIAL
+    minimum_unsanitized_findings: 1
+  tags:
+  - generic
+  - positional
+  - financial
+- id: in_scope_positional_invoke_phone_018
+  path: cases/in_scope/in_scope_positional_invoke_phone_018.py
+  partition: in_scope
+  family: generic_invoke
+  description: Phone number reaches a configurable invoke sink by positional argument.
+  expected:
+    vulnerable: true
+    categories:
+    - PHONE
+    minimum_unsanitized_findings: 1
+  tags:
+  - positional
+  - generic
+  - phone
+- id: in_scope_public_response_safe_038
+  path: cases/in_scope/in_scope_public_response_safe_038.py
+  partition: in_scope
+  family: safe_public
+  description: Public product name reaches OpenAI Responses.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - public
+  - openai
+- id: in_scope_reassignment_kills_taint_safe_040
+  path: cases/in_scope/in_scope_reassignment_kills_taint_safe_040.py
+  partition: in_scope
+  family: reassignment
+  description: Email variable is reassigned to a public constant before the sink.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - reassignment
+  - openai
+  - email
+- id: in_scope_redacted_email_safe_037
+  path: cases/in_scope/in_scope_redacted_email_safe_037.py
+  partition: in_scope
+  family: sanitizer
+  description: Email is redacted before OpenAI Responses.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - sanitizer
+  - openai
+  - email
+- id: in_scope_redacted_medical_safe_044
+  path: cases/in_scope/in_scope_redacted_medical_safe_044.py
+  partition: in_scope
+  family: sanitizer
+  description: Medical diagnosis is redacted before OpenAI Chat.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - sanitizer
+  - openai
+  - medical
+- id: in_scope_same_named_safe_local_safe_060
+  path: cases/in_scope/in_scope_same_named_safe_local_safe_060
+  partition: in_scope
+  family: module_collision
+  description: Same-module safe helper is preferred over vulnerable same-named helper
+    elsewhere.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - module_collision
+  - openai
+  - email
+- id: in_scope_same_named_vulnerable_027
+  path: cases/in_scope/in_scope_same_named_vulnerable_027
+  partition: in_scope
+  family: module_collision
+  description: Same-module vulnerable helper is preferred over safe same-named helper
+    elsewhere.
+  expected:
+    vulnerable: true
+    categories:
+    - EMAIL
+    minimum_unsanitized_findings: 1
+  tags:
+  - module_collision
+  - openai
+  - email
+- id: in_scope_sanitized_copy_original_tainted_035
+  path: cases/in_scope/in_scope_sanitized_copy_original_tainted_035.py
+  partition: in_scope
+  family: sanitizer
+  description: A sanitized copy is safe but the original email remains tainted.
+  expected:
+    vulnerable: true
+    categories:
+    - EMAIL
+    minimum_unsanitized_findings: 1
+  tags:
+  - sanitizer
+  - openai
+  - email
+- id: in_scope_sensitive_not_sent_safe_048
+  path: cases/in_scope/in_scope_sensitive_not_sent_safe_048.py
+  partition: in_scope
+  family: safe_public
+  description: Email is read but only public text is sent.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - openai
+  - email
+- id: in_scope_sink_public_sensitive_local_safe_049
+  path: cases/in_scope/in_scope_sink_public_sensitive_local_safe_049.py
+  partition: in_scope
+  family: safe_public
+  description: Sensitive local value is not included in sink input.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - openai
+  - financial
+- id: in_scope_static_method_phone_023
+  path: cases/in_scope/in_scope_static_method_phone_023.py
+  partition: in_scope
+  family: method_binding
+  description: Static method propagates phone without receiver binding.
+  expected:
+    vulnerable: true
+    categories:
+    - PHONE
+    minimum_unsanitized_findings: 1
+  tags:
+  - staticmethod
+  - openai
+  - phone
+- id: in_scope_static_public_safe_056
+  path: cases/in_scope/in_scope_static_public_safe_056.py
+  partition: in_scope
+  family: method_binding
+  description: Static method receives public text only.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - staticmethod
+  - openai
+- id: in_scope_tuple_financial_chat_010
+  path: cases/in_scope/in_scope_tuple_financial_chat_010.py
+  partition: in_scope
+  family: container
+  description: Salary in a tuple reaches OpenAI Chat messages.
+  expected:
+    vulnerable: true
+    categories:
+    - FINANCIAL
+    minimum_unsanitized_findings: 1
+  tags:
+  - tuple
+  - openai
+  - financial
+- id: in_scope_tuple_public_safe_067
+  path: cases/in_scope/in_scope_tuple_public_safe_067.py
+  partition: in_scope
+  family: container
+  description: Tuple contains only public data.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - tuple
+  - openai
+- id: in_scope_two_function_medical_017
+  path: cases/in_scope/in_scope_two_function_medical_017.py
+  partition: in_scope
+  family: interprocedural_chain
+  description: Medical diagnosis flows through two project-local helpers.
+  expected:
+    vulnerable: true
+    categories:
+    - MEDICAL
+    minimum_unsanitized_findings: 1
+  tags:
+  - helper_chain
+  - anthropic
+  - medical
+- id: in_scope_unknown_call_government_013
+  path: cases/in_scope/in_scope_unknown_call_government_013.py
+  partition: in_scope
+  family: unknown_call
+  description: Unknown transformation of a passport number remains tainted.
+  expected:
+    vulnerable: true
+    categories:
+    - GOVERNMENT_ID
+    minimum_unsanitized_findings: 1
+  tags:
+  - unknown_call
+  - openai
+  - government_id
+- id: in_scope_unknown_call_public_safe_050
+  path: cases/in_scope/in_scope_unknown_call_public_safe_050.py
+  partition: in_scope
+  family: unknown_call
+  description: Unknown call processes public data only.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - unknown_call
+  - openai
+- id: in_scope_untainted_helper_safe_042
+  path: cases/in_scope/in_scope_untainted_helper_safe_042.py
+  partition: in_scope
+  family: interprocedural
+  description: Helper processes only public data.
+  expected:
+    vulnerable: false
+    categories: []
+    maximum_unsanitized_findings: 0
+  tags:
+  - helper
+  - openai

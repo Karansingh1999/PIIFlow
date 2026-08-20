@@ -1,0 +1,8 @@
+version: 1
+sink_patterns:
+  - id: local-generate
+    call: "*.local_model.generate"
+    arguments: ["input"]
+    destination: local_llm
+    provider: local
+    trust_zone: local

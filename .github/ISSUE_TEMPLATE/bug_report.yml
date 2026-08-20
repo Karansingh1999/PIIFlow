@@ -1,0 +1,54 @@
+name: Bug report
+description: Report an incorrect result, crash, or documentation problem.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please use synthetic data only. Do not include credentials, real PII, private keys, or proprietary source code.
+  - type: input
+    id: version
+    attributes:
+      label: PIIFlow version
+      placeholder: "0.3.0"
+    validations:
+      required: true
+  - type: dropdown
+    id: bug_type
+    attributes:
+      label: Issue type
+      options:
+        - False positive
+        - False negative
+        - CLI or packaging error
+        - Documentation issue
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal synthetic reproduction
+      description: Include the smallest source snippet and command needed to reproduce.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Python version, OS, and relevant command output.
+    validations:
+      required: false

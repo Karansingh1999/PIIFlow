@@ -1,0 +1,297 @@
+version: 1
+cases:
+  - id: policy_in_scope_allow_email_openai_001
+    path: policy_cases/apps/openai_email.py
+    policy: policy_cases/policies/allow_email_openai.yml
+    partition: in_scope
+    family: allow
+    description: OpenAI email flow is compliant under an explicit allow rule.
+    expected: {status: compliant, categories: [EMAIL], action: allow, provider: openai, trust_zone: external}
+    tags: [allow, openai, external, email]
+  - id: policy_in_scope_default_allow_email_002
+    path: policy_cases/apps/openai_email.py
+    policy: policy_cases/policies/default_allow.yml
+    partition: in_scope
+    family: default_allow
+    description: OpenAI email flow is compliant under default allow.
+    expected: {status: compliant, categories: [EMAIL], action: allow, provider: openai, trust_zone: external}
+    tags: [default_allow, openai, external, email]
+  - id: policy_in_scope_default_deny_email_003
+    path: policy_cases/apps/openai_email.py
+    policy: policy_cases/policies/default_deny.yml
+    partition: in_scope
+    family: default_deny
+    description: OpenAI email flow violates default deny.
+    expected: {status: violation, categories: [EMAIL], action: deny, provider: openai, trust_zone: external}
+    tags: [default_deny, openai, external, email]
+  - id: policy_in_scope_require_redacted_email_004
+    path: policy_cases/apps/openai_redacted_email.py
+    policy: policy_cases/policies/require_email_redact.yml
+    partition: in_scope
+    family: require_sanitizer
+    description: Email flow with redact_email is compliant.
+    expected: {status: compliant, categories: [EMAIL], action: require_sanitizer, provider: openai, trust_zone: external}
+    tags: [require_sanitizer, correct_sanitizer, openai, external, email]
+  - id: policy_in_scope_require_unsanitized_email_005
+    path: policy_cases/apps/openai_email.py
+    policy: policy_cases/policies/require_email_redact.yml
+    partition: in_scope
+    family: require_sanitizer
+    description: Email flow missing redact_email violates policy.
+    expected: {status: violation, categories: [EMAIL], action: require_sanitizer, provider: openai, trust_zone: external}
+    tags: [require_sanitizer, no_sanitizer, openai, external, email]
+  - id: policy_in_scope_require_wrong_sanitizer_email_006
+    path: policy_cases/apps/openai_masked_email.py
+    policy: policy_cases/policies/require_email_redact.yml
+    partition: in_scope
+    family: require_sanitizer
+    description: Email flow with mask_email violates a redact_email requirement.
+    expected: {status: violation, categories: [EMAIL], action: require_sanitizer, provider: openai, trust_zone: external}
+    tags: [require_sanitizer, incorrect_sanitizer, openai, external, email]
+  - id: policy_in_scope_deny_medical_external_007
+    path: policy_cases/apps/openai_medical.py
+    policy: policy_cases/policies/deny_medical_external.yml
+    partition: in_scope
+    family: deny
+    description: Medical flow to OpenAI violates an external deny rule.
+    expected: {status: violation, categories: [MEDICAL], action: deny, provider: openai, trust_zone: external}
+    tags: [deny, openai, external, medical]
+  - id: policy_in_scope_sanitized_medical_still_denied_008
+    path: policy_cases/apps/redacted_medical.py
+    policy: policy_cases/policies/deny_medical_external.yml
+    partition: in_scope
+    family: deny
+    description: Sanitized medical flow is still denied by an absolute deny rule.
+    expected: {status: violation, categories: [MEDICAL], action: deny, provider: openai, trust_zone: external}
+    tags: [deny, sanitized, openai, external, medical]
+  - id: policy_in_scope_default_allow_medical_009
+    path: policy_cases/apps/openai_medical.py
+    policy: policy_cases/policies/default_allow.yml
+    partition: in_scope
+    family: default_allow
+    description: Medical flow is compliant when no rule matches and default is allow.
+    expected: {status: compliant, categories: [MEDICAL], action: allow, provider: openai, trust_zone: external}
+    tags: [default_allow, openai, external, medical]
+  - id: policy_in_scope_deny_all_phone_anthropic_010
+    path: policy_cases/apps/anthropic_phone.py
+    policy: policy_cases/policies/deny_all_external.yml
+    partition: in_scope
+    family: wildcard
+    description: Phone flow to Anthropic violates wildcard external deny.
+    expected: {status: violation, categories: [PHONE], action: deny, provider: anthropic, trust_zone: external}
+    tags: [wildcard, anthropic, external, phone]
+  - id: policy_in_scope_default_allow_phone_anthropic_011
+    path: policy_cases/apps/anthropic_phone.py
+    policy: policy_cases/policies/default_allow.yml
+    partition: in_scope
+    family: default_allow
+    description: Phone flow to Anthropic is compliant under default allow.
+    expected: {status: compliant, categories: [PHONE], action: allow, provider: anthropic, trust_zone: external}
+    tags: [default_allow, anthropic, external, phone]
+  - id: policy_in_scope_default_deny_phone_anthropic_012
+    path: policy_cases/apps/anthropic_phone.py
+    policy: policy_cases/policies/default_deny.yml
+    partition: in_scope
+    family: default_deny
+    description: Phone flow to Anthropic violates default deny.
+    expected: {status: violation, categories: [PHONE], action: deny, provider: anthropic, trust_zone: external}
+    tags: [default_deny, anthropic, external, phone]
+  - id: policy_in_scope_default_allow_government_generic_013
+    path: policy_cases/apps/generic_government.py
+    policy: policy_cases/policies/default_allow.yml
+    partition: in_scope
+    family: default_allow
+    description: Government ID flow to a generic sink is compliant under default allow.
+    expected: {status: compliant, categories: [GOVERNMENT_ID], action: allow, provider: generic, trust_zone: external}
+    tags: [default_allow, generic, external, government_id]
+  - id: policy_in_scope_default_deny_government_generic_014
+    path: policy_cases/apps/generic_government.py
+    policy: policy_cases/policies/default_deny.yml
+    partition: in_scope
+    family: default_deny
+    description: Government ID flow to a generic sink violates default deny.
+    expected: {status: violation, categories: [GOVERNMENT_ID], action: deny, provider: generic, trust_zone: external}
+    tags: [default_deny, generic, external, government_id]
+  - id: policy_in_scope_wildcard_deny_government_015
+    path: policy_cases/apps/generic_government.py
+    policy: policy_cases/policies/deny_all_external.yml
+    partition: in_scope
+    family: wildcard
+    description: Government ID flow violates wildcard external deny.
+    expected: {status: violation, categories: [GOVERNMENT_ID], action: deny, provider: generic, trust_zone: external}
+    tags: [wildcard, generic, external, government_id]
+  - id: policy_in_scope_allow_financial_local_016
+    path: policy_cases/apps/local_financial.py
+    policy: policy_cases/policies/allow_financial_local.yml
+    config: policy_cases/configs/local_sink.yml
+    partition: in_scope
+    family: allow
+    description: Financial flow to configured local model is compliant.
+    expected: {status: compliant, categories: [FINANCIAL], action: allow, provider: local, trust_zone: local}
+    tags: [allow, local, local_zone, financial]
+  - id: policy_in_scope_default_deny_financial_local_017
+    path: policy_cases/apps/local_financial.py
+    policy: policy_cases/policies/default_deny.yml
+    config: policy_cases/configs/local_sink.yml
+    partition: in_scope
+    family: default_deny
+    description: Financial flow to local model violates default deny.
+    expected: {status: violation, categories: [FINANCIAL], action: deny, provider: local, trust_zone: local}
+    tags: [default_deny, local, local_zone, financial]
+  - id: policy_in_scope_allow_location_internal_018
+    path: policy_cases/apps/internal_location.py
+    policy: policy_cases/policies/allow_location_internal.yml
+    config: policy_cases/configs/internal_sink.yml
+    partition: in_scope
+    family: allow
+    description: Location flow to configured internal sink is compliant.
+    expected: {status: compliant, categories: [LOCATION], action: allow, provider: generic, trust_zone: internal}
+    tags: [allow, generic, internal, location]
+  - id: policy_in_scope_default_deny_location_internal_019
+    path: policy_cases/apps/internal_location.py
+    policy: policy_cases/policies/default_deny.yml
+    config: policy_cases/configs/internal_sink.yml
+    partition: in_scope
+    family: default_deny
+    description: Location flow to configured internal sink violates default deny.
+    expected: {status: violation, categories: [LOCATION], action: deny, provider: generic, trust_zone: internal}
+    tags: [default_deny, generic, internal, location]
+  - id: policy_in_scope_first_match_allows_email_020
+    path: policy_cases/apps/openai_email.py
+    policy: policy_cases/policies/first_match_allow.yml
+    partition: in_scope
+    family: first_match
+    description: Earlier allow rule wins over later deny rule.
+    expected: {status: compliant, categories: [EMAIL], action: allow, provider: openai, trust_zone: external}
+    tags: [first_match, openai, external, email]
+  - id: policy_in_scope_first_match_denies_email_021
+    path: policy_cases/apps/openai_email.py
+    policy: policy_cases/policies/first_match_deny.yml
+    partition: in_scope
+    family: first_match
+    description: Earlier deny rule wins over later allow rule.
+    expected: {status: violation, categories: [EMAIL], action: deny, provider: openai, trust_zone: external}
+    tags: [first_match, openai, external, email]
+  - id: policy_in_scope_wrong_provider_no_match_022
+    path: policy_cases/apps/anthropic_phone.py
+    policy: policy_cases/policies/allow_email_openai.yml
+    partition: in_scope
+    family: provider_match
+    description: OpenAI email allow rule does not match Anthropic phone flow.
+    expected: {status: violation, categories: [PHONE], action: deny, provider: anthropic, trust_zone: external}
+    tags: [provider, anthropic, external, phone]
+  - id: policy_in_scope_wrong_trust_zone_no_match_023
+    path: policy_cases/apps/local_financial.py
+    policy: policy_cases/policies/deny_all_external.yml
+    config: policy_cases/configs/local_sink.yml
+    partition: in_scope
+    family: trust_zone_match
+    description: External wildcard deny does not match local trust zone.
+    expected: {status: compliant, categories: [FINANCIAL], action: allow, provider: local, trust_zone: local}
+    tags: [trust_zone, local, local_zone, financial]
+  - id: policy_in_scope_wrong_category_no_match_024
+    path: policy_cases/apps/openai_medical.py
+    policy: policy_cases/policies/allow_email_openai.yml
+    partition: in_scope
+    family: category_match
+    description: Email allow rule does not match medical flow.
+    expected: {status: violation, categories: [MEDICAL], action: deny, provider: openai, trust_zone: external}
+    tags: [category, openai, external, medical]
+  - id: policy_challenge_dict_email_allowed_025
+    path: policy_cases/apps/dict_private_email.py
+    policy: policy_cases/policies/allow_email_openai.yml
+    partition: challenge
+    family: structured_dict
+    description: Structured dictionary email flow is policy-compliant.
+    expected: {status: compliant, categories: [EMAIL], action: allow, provider: openai, trust_zone: external}
+    tags: [structured_dict, openai, external, email]
+  - id: policy_challenge_dict_email_denied_026
+    path: policy_cases/apps/dict_private_email.py
+    policy: policy_cases/policies/default_deny.yml
+    partition: challenge
+    family: structured_dict
+    description: Structured dictionary email flow violates default deny.
+    expected: {status: violation, categories: [EMAIL], action: deny, provider: openai, trust_zone: external}
+    tags: [structured_dict, openai, external, email]
+  - id: policy_challenge_request_alias_allowed_027
+    path: policy_cases/apps/request_alias_email.py
+    policy: policy_cases/policies/allow_email_openai.yml
+    partition: challenge
+    family: request_alias
+    description: Request alias email flow is policy-compliant.
+    expected: {status: compliant, categories: [EMAIL], action: allow, provider: openai, trust_zone: external}
+    tags: [request_alias, openai, external, email]
+  - id: policy_challenge_request_alias_denied_028
+    path: policy_cases/apps/request_alias_email.py
+    policy: policy_cases/policies/default_deny.yml
+    partition: challenge
+    family: request_alias
+    description: Request alias email flow violates default deny.
+    expected: {status: violation, categories: [EMAIL], action: deny, provider: openai, trust_zone: external}
+    tags: [request_alias, openai, external, email]
+  - id: policy_challenge_attribute_allowed_029
+    path: policy_cases/apps/attribute_email.py
+    policy: policy_cases/policies/allow_email_openai.yml
+    partition: challenge
+    family: attribute
+    description: Attribute-carried email flow is policy-compliant.
+    expected: {status: compliant, categories: [EMAIL], action: allow, provider: openai, trust_zone: external}
+    tags: [attribute, openai, external, email]
+  - id: policy_challenge_attribute_denied_030
+    path: policy_cases/apps/attribute_email.py
+    policy: policy_cases/policies/default_deny.yml
+    partition: challenge
+    family: attribute
+    description: Attribute-carried email flow violates default deny.
+    expected: {status: violation, categories: [EMAIL], action: deny, provider: openai, trust_zone: external}
+    tags: [attribute, openai, external, email]
+  - id: policy_challenge_helper_financial_allowed_default_031
+    path: policy_cases/apps/helper_financial.py
+    policy: policy_cases/policies/default_allow.yml
+    partition: challenge
+    family: interprocedural
+    description: Interprocedural financial flow is compliant under default allow.
+    expected: {status: compliant, categories: [FINANCIAL], action: allow, provider: openai, trust_zone: external}
+    tags: [interprocedural, openai, external, financial]
+  - id: policy_challenge_helper_financial_denied_032
+    path: policy_cases/apps/helper_financial.py
+    policy: policy_cases/policies/default_deny.yml
+    partition: challenge
+    family: interprocedural
+    description: Interprocedural financial flow violates default deny.
+    expected: {status: violation, categories: [FINANCIAL], action: deny, provider: openai, trust_zone: external}
+    tags: [interprocedural, openai, external, financial]
+  - id: policy_challenge_hashed_email_wrong_sanitizer_033
+    path: policy_cases/apps/hashed_email.py
+    policy: policy_cases/policies/require_email_redact.yml
+    partition: challenge
+    family: sanitizer_evidence
+    description: Hashing is not accepted as redact_email evidence.
+    expected: {status: violation, categories: [EMAIL], action: require_sanitizer, provider: openai, trust_zone: external}
+    tags: [incorrect_sanitizer, openai, external, email]
+  - id: policy_challenge_masked_email_default_allow_034
+    path: policy_cases/apps/openai_masked_email.py
+    policy: policy_cases/policies/default_allow.yml
+    partition: challenge
+    family: sanitizer_evidence
+    description: Masked email flow is compliant under default allow.
+    expected: {status: compliant, categories: [EMAIL], action: allow, provider: openai, trust_zone: external}
+    tags: [default_allow, sanitized, openai, external, email]
+  - id: policy_challenge_local_financial_allowed_035
+    path: policy_cases/apps/local_financial.py
+    policy: policy_cases/policies/allow_financial_local.yml
+    config: policy_cases/configs/local_sink.yml
+    partition: challenge
+    family: local_boundary
+    description: Configured local financial flow is compliant.
+    expected: {status: compliant, categories: [FINANCIAL], action: allow, provider: local, trust_zone: local}
+    tags: [local, local_zone, financial]
+  - id: policy_challenge_internal_location_denied_default_036
+    path: policy_cases/apps/internal_location.py
+    policy: policy_cases/policies/default_deny.yml
+    config: policy_cases/configs/internal_sink.yml
+    partition: challenge
+    family: internal_boundary
+    description: Internal location flow violates default deny.
+    expected: {status: violation, categories: [LOCATION], action: deny, provider: generic, trust_zone: internal}
+    tags: [internal, location]

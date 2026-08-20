@@ -1,0 +1,9 @@
+version: 1
+default_action: deny
+rules:
+  - id: allow-financial-local
+    description: Financial data may be processed by local models.
+    categories: [FINANCIAL]
+    providers: [local]
+    trust_zones: [local]
+    action: allow

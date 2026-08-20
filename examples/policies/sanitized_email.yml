@@ -1,0 +1,10 @@
+version: 1
+default_action: deny
+rules:
+  - id: require-redacted-email-openai
+    description: Email may be sent to OpenAI only after redact_email.
+    categories: [EMAIL]
+    providers: [openai]
+    trust_zones: [external]
+    action: require_sanitizer
+    sanitizers: [redact_email]

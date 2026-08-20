@@ -1,0 +1,9 @@
+version: 1
+default_action: allow
+rules:
+  - id: deny-all-external
+    description: Sensitive data may not cross an external trust boundary.
+    categories: ["*"]
+    providers: ["*"]
+    trust_zones: [external]
+    action: deny

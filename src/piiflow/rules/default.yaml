@@ -1,0 +1,64 @@
+version: 1
+
+sensitive_names:
+  EMAIL:
+    - email
+    - email_address
+  PHONE:
+    - phone
+    - phone_number
+    - mobile
+  GOVERNMENT_ID:
+    - ssn
+    - aadhaar
+    - passport_number
+  FINANCIAL:
+    - card_number
+    - account_number
+    - salary
+  MEDICAL:
+    - diagnosis
+    - medical_history
+    - patient_record
+  LOCATION:
+    - home_address
+    - postal_address
+
+source_patterns:
+  - "request.json[*]"
+  - "request.form[*]"
+  - "request.args[*]"
+
+sink_patterns:
+  - id: openai-responses
+    call: "*.responses.create"
+    arguments: ["input"]
+    destination: external_llm
+    provider: openai
+    trust_zone: external
+  - id: openai-chat
+    call: "*.chat.completions.create"
+    arguments: ["messages"]
+    destination: external_llm
+    provider: openai
+    trust_zone: external
+  - id: anthropic-messages
+    call: "*.messages.create"
+    arguments: ["messages"]
+    destination: external_llm
+    provider: anthropic
+    trust_zone: external
+  - id: generic-invoke
+    call: "*.invoke"
+    arguments: [0, "input"]
+    destination: configurable_llm
+    provider: generic
+    trust_zone: external
+
+sanitizer_patterns:
+  - "redact_pii"
+  - "redact_email"
+  - "mask_email"
+  - "mask_financial"
+  - "mask_sensitive"
+  - "anonymize"

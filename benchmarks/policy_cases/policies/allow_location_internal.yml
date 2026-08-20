@@ -1,0 +1,9 @@
+version: 1
+default_action: deny
+rules:
+  - id: allow-location-internal
+    description: Location data may remain inside the internal zone.
+    categories: [LOCATION]
+    providers: [generic]
+    trust_zones: [internal]
+    action: allow

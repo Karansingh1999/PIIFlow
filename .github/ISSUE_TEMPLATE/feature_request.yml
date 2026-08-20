@@ -1,0 +1,44 @@
+name: Feature request
+description: Propose a scoped improvement to PIIFlow.
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Keep requests scoped to static source analysis, rules, documentation, benchmarks, or policy evaluation. Do not include real PII or proprietary code.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What user problem would this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: Describe the smallest useful change.
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Source rule
+        - Sink rule
+        - Sanitizer rule
+        - Policy model
+        - Static analysis
+        - Benchmark
+        - Documentation
+        - Packaging or CI
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional context
+    validations:
+      required: false

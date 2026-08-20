@@ -1,0 +1,69 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  ubuntu-quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: astral-sh/setup-uv@v4
+      - run: uv sync --extra dev
+      - run: uv run ruff format --check .
+      - run: uv run ruff check .
+      - run: uv run mypy src/piiflow benchmarks
+      - run: uv run pytest --cov=piiflow --cov-report=term-missing --cov-fail-under=90
+      - run: uv run python benchmarks/run.py --partition all --system all
+      - run: uv run python benchmarks/run_policy.py --system all
+      - name: Verify benchmark hashes and metrics
+        run: |
+          uv run python -c "import json; m=json.load(open('benchmarks/results/metrics.json')); meta=m['metadata']; metrics=m['systems']['piiflow']['overall']['metrics']; assert meta['manifest_hash']=='2335f30a119652db32aca3163e4b1a4d91a1e2bb8331cec51d247cd444ee51c7'; assert meta['benchmark_content_hash']=='a34c9817f0da31aaf4bd8a9590796614c62cbf33137b6486c3192d794f361f94'; assert metrics['precision']==0.9545454545454546; assert metrics['recall']==0.84; assert metrics['f1']==0.8936170212765958; assert metrics['accuracy']==0.8888888888888888; assert metrics['true_positives']==42; assert metrics['false_positives']==2; assert metrics['true_negatives']==38; assert metrics['false_negatives']==8"
+          uv run python -c "import json; m=json.load(open('benchmarks/results/phase2b2_policy/metrics.json')); meta=m['metadata']; metrics=m['systems']['piiflow_policy']['overall']['metrics']; assert meta['manifest_hash']=='694cf6af4faa5cf7e002a57d650ee3e6ad7aa1204b9d0db0f2c96edcc20a3511'; assert meta['policy_content_hash']=='be63a102eff6f4c89100221f153f713dda74475662c5783c257d46efd2eddc66'; assert metrics['precision']==1.0; assert metrics['recall']==1.0; assert metrics['f1']==1.0; assert metrics['accuracy']==1.0; assert metrics['true_positives']==20; assert metrics['false_positives']==0; assert metrics['true_negatives']==16; assert metrics['false_negatives']==0"
+      - run: uv build
+      - name: Wheel smoke test
+        run: |
+          smoke_env="$RUNNER_TEMP/piiflow-wheel-smoke"
+          uv venv "$smoke_env"
+          uv pip install --python "$smoke_env/bin/python" dist/piiflow-0.3.0-py3-none-any.whl
+          "$smoke_env/bin/piiflow" scan --help
+          "$smoke_env/bin/piiflow" scan examples/safe_app
+          if "$smoke_env/bin/piiflow" scan examples/vulnerable_app; then exit 1; else test "$?" -eq 1; fi
+          "$smoke_env/bin/piiflow" scan examples/policy_apps/redacted_email.py --policy examples/policies/sanitized_email.yml
+          if "$smoke_env/bin/piiflow" scan examples/policy_apps/wrong_email_sanitizer.py --policy examples/policies/sanitized_email.yml; then exit 1; else test "$?" -eq 1; fi
+          "$smoke_env/bin/piiflow" scan examples/policy_apps/redacted_email.py --policy examples/policies/sanitized_email.yml --format json --output "$RUNNER_TEMP/piiflow-policy.json"
+          printf "version: 1\ndefault_action: maybe\nrules: []\n" > "$RUNNER_TEMP/bad-policy.yml"
+          if "$smoke_env/bin/piiflow" scan examples/safe_app --policy "$RUNNER_TEMP/bad-policy.yml"; then exit 1; else test "$?" -eq 2; fi
+          "$smoke_env/bin/python" -c "from piiflow.config import load_config; import piiflow; assert piiflow.__version__ == '0.3.0'; assert load_config().version == 1"
+      - name: Inspect artifacts
+        run: |
+          python -m zipfile --list dist/piiflow-0.3.0-py3-none-any.whl
+          tar -tf dist/piiflow-0.3.0.tar.gz
+          ! python -m zipfile --list dist/piiflow-0.3.0-py3-none-any.whl | grep -E 'tests/|benchmarks/|\.venv|\.tmp|\.coverage|dist/'
+          ! tar -tf dist/piiflow-0.3.0.tar.gz | grep -E '\.venv|\.tmp|\.coverage|\.uv-cache|benchmarks/results|/dist/'
+
+  windows-cli-smoke:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: astral-sh/setup-uv@v4
+      - run: uv sync --extra dev
+      - name: CLI examples
+        shell: pwsh
+        run: |
+          uv run piiflow scan examples/safe_app
+          uv run piiflow scan examples/vulnerable_app
+          if ($LASTEXITCODE -ne 1) { exit 1 }
+          uv run piiflow scan examples/policy_apps/redacted_email.py --policy examples/policies/sanitized_email.yml
+          uv run piiflow scan examples/policy_apps/wrong_email_sanitizer.py --policy examples/policies/sanitized_email.yml
+          if ($LASTEXITCODE -ne 1) { exit 1 }

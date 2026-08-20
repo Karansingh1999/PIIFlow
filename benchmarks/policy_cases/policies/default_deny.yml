@@ -1,0 +1,3 @@
+version: 1
+default_action: deny
+rules: []

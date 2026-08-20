@@ -1,0 +1,9 @@
+version: 1
+default_action: allow
+rules:
+  - id: deny-medical-external
+    description: Medical information is prohibited from external LLMs.
+    categories: [MEDICAL]
+    providers: ["*"]
+    trust_zones: [external]
+    action: deny

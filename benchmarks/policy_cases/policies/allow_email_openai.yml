@@ -1,0 +1,9 @@
+version: 1
+default_action: deny
+rules:
+  - id: allow-email-openai
+    description: Email may be sent to OpenAI.
+    categories: [EMAIL]
+    providers: [openai]
+    trust_zones: [external]
+    action: allow

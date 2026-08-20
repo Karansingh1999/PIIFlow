@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-labelledby="title desc">
+  <title id="title">PIIFlow banner</title>
+  <desc id="desc">PIIFlow, Policy-Aware Privacy Flow Analysis for LLM Applications, showing source to propagation to policy to LLM sink.</desc>
+  <rect width="1200" height="360" fill="#f8fafc"/>
+  <rect x="40" y="40" width="1120" height="280" rx="24" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="96" y="118" font-family="Arial, Helvetica, sans-serif" font-size="56" font-weight="700" fill="#0f172a">PIIFlow</text>
+  <text x="98" y="158" font-family="Arial, Helvetica, sans-serif" font-size="24" fill="#334155">Policy-Aware Privacy Flow Analysis for LLM Applications</text>
+
+  <g font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">
+    <rect x="96" y="215" width="180" height="68" rx="12" fill="#e0f2fe" stroke="#0369a1" stroke-width="2"/>
+    <text x="136" y="244" fill="#075985">Python</text>
+    <text x="137" y="268" fill="#075985">source</text>
+
+    <path d="M288 249H366" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
+    <path d="M366 249l-14-10v20z" fill="#475569"/>
+
+    <rect x="388" y="215" width="180" height="68" rx="12" fill="#f0fdf4" stroke="#15803d" stroke-width="2"/>
+    <text x="429" y="244" fill="#166534">Taint</text>
+    <text x="421" y="268" fill="#166534">propagation</text>
+
+    <path d="M580 249H658" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
+    <path d="M658 249l-14-10v20z" fill="#475569"/>
+
+    <rect x="680" y="215" width="180" height="68" rx="12" fill="#fff7ed" stroke="#c2410c" stroke-width="2"/>
+    <text x="733" y="244" fill="#9a3412">Policy</text>
+    <text x="717" y="268" fill="#9a3412">decision</text>
+
+    <path d="M872 249H950" stroke="#475569" stroke-width="4" stroke-linecap="round"/>
+    <path d="M950 249l-14-10v20z" fill="#475569"/>
+
+    <rect x="972" y="215" width="132" height="68" rx="12" fill="#eef2ff" stroke="#4338ca" stroke-width="2"/>
+    <text x="1006" y="244" fill="#3730a3">LLM</text>
+    <text x="1003" y="268" fill="#3730a3">sink</text>
+  </g>
+
+  <g fill="none" stroke="#94a3b8" stroke-width="1.5">
+    <path d="M96 186H1104"/>
+    <path d="M186 186V215"/>
+    <path d="M478 186V215"/>
+    <path d="M770 186V215"/>
+    <path d="M1038 186V215"/>
+  </g>
+  <text x="96" y="197" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#475569">Static source analysis, sanitizer provenance, provider metadata, and trust-boundary policy checks.</text>
+</svg>

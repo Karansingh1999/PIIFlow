@@ -1,0 +1,15 @@
+version: 1
+default_action: allow
+rules:
+  - id: deny-email-first
+    description: First matching rule denies OpenAI email.
+    categories: [EMAIL]
+    providers: [openai]
+    trust_zones: [external]
+    action: deny
+  - id: allow-email-second
+    description: Later allow rule does not run.
+    categories: [EMAIL]
+    providers: [openai]
+    trust_zones: [external]
+    action: allow

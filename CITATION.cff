@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use PIIFlow, please cite it using this metadata."
+title: "PIIFlow: Policy-Aware Privacy Flow Analysis for LLM Applications"
+authors:
+  - family-names: Singh
+    given-names: Karan Kumar
+    orcid: "https://orcid.org/0009-0002-6166-4989"
+version: "0.3.0"
+license: Apache-2.0
+type: software

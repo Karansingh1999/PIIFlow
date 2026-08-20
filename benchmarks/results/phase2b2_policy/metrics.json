@@ -1,0 +1,726 @@
+{
+  "case_counts": {
+    "challenge": 12,
+    "in_scope": 24,
+    "total": 36
+  },
+  "label_distribution": {
+    "compliant": 16,
+    "violation": 20
+  },
+  "metadata": {
+    "case_count": 36,
+    "manifest_hash": "694cf6af4faa5cf7e002a57d650ee3e6ad7aa1204b9d0db0f2c96edcc20a3511",
+    "piiflow_version": "0.3.0",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "policy_content_hash": "be63a102eff6f4c89100221f153f713dda74475662c5783c257d46efd2eddc66",
+    "python_version": "3.14.7 (main, Aug 14 2026, 15:39:58) [MSC v.1944 64 bit (AMD64)]",
+    "systems": [
+      "piiflow_policy",
+      "policy_blind"
+    ]
+  },
+  "systems": {
+    "piiflow_policy": {
+      "by_action": {
+        "allow": {
+          "case_count": 15,
+          "metrics": {
+            "accuracy": 1.0,
+            "f1": 0.0,
+            "false_negatives": 0,
+            "false_positives": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "true_negatives": 15,
+            "true_positives": 0
+          },
+          "runtime": {
+            "median_seconds": 0.006281099980697036,
+            "total_seconds": 0.10168339998926967
+          }
+        },
+        "deny": {
+          "case_count": 17,
+          "metrics": {
+            "accuracy": 1.0,
+            "f1": 1.0,
+            "false_negatives": 0,
+            "false_positives": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "true_negatives": 0,
+            "true_positives": 17
+          },
+          "runtime": {
+            "median_seconds": 0.006244900054298341,
+            "total_seconds": 0.10757620027288795
+          }
+        },
+        "require_sanitizer": {
+          "case_count": 4,
+          "metrics": {
+            "accuracy": 1.0,
+            "f1": 1.0,
+            "false_negatives": 0,
+            "false_positives": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "true_negatives": 1,
+            "true_positives": 3
+          },
+          "runtime": {
+            "median_seconds": 0.006326549919322133,
+            "total_seconds": 0.027252699830569327
+          }
+        }
+      },
+      "by_category": {
+        "EMAIL": {
+          "case_count": 16,
+          "metrics": {
+            "accuracy": 1.0,
+            "f1": 1.0,
+            "false_negatives": 0,
+            "false_positives": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "true_negatives": 8,
+            "true_positives": 8
+          },
+          "runtime": {
+            "median_seconds": 0.0062536499463021755,
+            "total_seconds": 0.10172769974451512
+          }
+        },
+        "FINANCIAL": {
+          "case_count": 6,
+          "metrics": {
+            "accuracy": 1.0,
+            "f1": 1.0,
+            "false_negatives": 0,
+            "false_positives": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "true_negatives": 4,
+            "true_positives": 2
+          },
+          "runtime": {
+            "median_seconds": 0.007653850014321506,
+            "total_seconds": 0.04687680001370609
+          }
+        },
+        "GOVERNMENT_ID": {
+          "case_count": 3,
+          "metrics": {
+            "accuracy": 1.0,
+            "f1": 1.0,
+            "false_negatives": 0,
+            "false_positives": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "true_negatives": 1,
+            "true_positives": 2
+          },
+          "runtime": {
+            "median_seconds": 0.006691299960948527,
+            "total_seconds": 0.018864699988625944
+          }
+        },
+        "LOCATION": {
+          "case_count": 3,
+          "metrics": {
+            "accuracy": 1.0,
+            "f1": 1.0,
+            "false_negatives": 0,
+            "false_positives": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "true_negatives": 1,
+            "true_positives": 2
+          },
+          "runtime": {
+            "median_seconds": 0.007507700007408857,
+            "total_seconds": 0.021389900124631822
+          }
+        },
+        "MEDICAL": {
+          "case_count": 4,
+          "metrics": {
+            "accuracy": 1.0,
+            "f1": 1.0,
+            "false_negatives": 0,
+            "false_positives": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "true_negatives": 1,
+            "true_positives": 3
+          },
+          "runtime": {
+            "median_seconds": 0.006067149981390685,
+            "total_seconds": 0.024256400065496564
+          }
+        },
+        "PHONE": {
+          "case_count": 4,
+          "metrics": {
+            "accuracy": 1.0,
+            "f1": 1.0,
+            "false_negatives": 0,
+            "false_positives": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "true_negatives": 1,
+            "true_positives": 3
+          },
+          "runtime": {
+            "median_seconds": 0.005913300032261759,
+            "total_seconds": 0.023396800155751407
+          }
+        }
+      },
+      "by_partition": {
+        "challenge": {
+          "case_count": 12,
+          "metrics": {
+            "accuracy": 1.0,
+            "f1": 1.0,
+            "false_negatives": 0,
+            "false_positives": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "true_negatives": 6,
+            "true_positives": 6
+          },
+          "runtime": {
+            "median_seconds": 0.006587049982044846,
+            "total_seconds": 0.08367799990810454
+          }
+        },
+        "in_scope": {
+          "case_count": 24,
+          "metrics": {
+            "accuracy": 1.0,
+            "f1": 1.0,
+            "false_negatives": 0,
+            "false_positives": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "true_negatives": 10,
+            "true_positives": 14
+          },
+          "runtime": {
+            "median_seconds": 0.006249949976336211,
+            "total_seconds": 0.1528343001846224
+          }
+        }
+      },
+      "by_provider": {
+        "anthropic": {
+          "case_count": 4,
+          "metrics": {
+            "accuracy": 1.0,
+            "f1": 1.0,
+            "false_negatives": 0,
+            "false_positives": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "true_negatives": 1,
+            "true_positives": 3
+          },
+          "runtime": {
+            "median_seconds": 0.005913300032261759,
+            "total_seconds": 0.023396800155751407
+          }
+        },
+        "generic": {
+          "case_count": 6,
+          "metrics": {
+            "accuracy": 1.0,
+            "f1": 1.0,
+            "false_negatives": 0,
+            "false_positives": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "true_negatives": 2,
+            "true_positives": 4
+          },
+          "runtime": {
+            "median_seconds": 0.0067044999450445175,
+            "total_seconds": 0.040254600113257766
+          }
+        },
+        "local": {
+          "case_count": 4,
+          "metrics": {
+            "accuracy": 1.0,
+            "f1": 1.0,
+            "false_negatives": 0,
+            "false_positives": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "true_negatives": 3,
+            "true_positives": 1
+          },
+          "runtime": {
+            "median_seconds": 0.007900800032075495,
+            "total_seconds": 0.032553200027905405
+          }
+        },
+        "openai": {
+          "case_count": 22,
+          "metrics": {
+            "accuracy": 1.0,
+            "f1": 1.0,
+            "false_negatives": 0,
+            "false_positives": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "true_negatives": 10,
+            "true_positives": 12
+          },
+          "runtime": {
+            "median_seconds": 0.0062536499463021755,
+            "total_seconds": 0.14030769979581237
+          }
+        }
+      },
+      "by_trust_zone": {
+        "external": {
+          "case_count": 29,
+          "metrics": {
+            "accuracy": 1.0,
+            "f1": 1.0,
+            "false_negatives": 0,
+            "false_positives": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "true_negatives": 12,
+            "true_positives": 17
+          },
+          "runtime": {
+            "median_seconds": 0.006244900054298341,
+            "total_seconds": 0.18256919994018972
+          }
+        },
+        "internal": {
+          "case_count": 3,
+          "metrics": {
+            "accuracy": 1.0,
+            "f1": 1.0,
+            "false_negatives": 0,
+            "false_positives": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "true_negatives": 1,
+            "true_positives": 2
+          },
+          "runtime": {
+            "median_seconds": 0.007507700007408857,
+            "total_seconds": 0.021389900124631822
+          }
+        },
+        "local": {
+          "case_count": 4,
+          "metrics": {
+            "accuracy": 1.0,
+            "f1": 1.0,
+            "false_negatives": 0,
+            "false_positives": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "true_negatives": 3,
+            "true_positives": 1
+          },
+          "runtime": {
+            "median_seconds": 0.007900800032075495,
+            "total_seconds": 0.032553200027905405
+          }
+        }
+      },
+      "error_count": 0,
+      "false_negative_ids": [],
+      "false_positive_ids": [],
+      "overall": {
+        "case_count": 36,
+        "metrics": {
+          "accuracy": 1.0,
+          "f1": 1.0,
+          "false_negatives": 0,
+          "false_positives": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "true_negatives": 16,
+          "true_positives": 20
+        },
+        "runtime": {
+          "median_seconds": 0.0062752499943599105,
+          "total_seconds": 0.23651230009272695
+        }
+      },
+      "runtime": {
+        "median_seconds": 0.0062752499943599105,
+        "total_seconds": 0.23651230009272695
+      }
+    },
+    "policy_blind": {
+      "by_action": {
+        "allow": {
+          "case_count": 15,
+          "metrics": {
+            "accuracy": 0.0,
+            "f1": 0.0,
+            "false_negatives": 0,
+            "false_positives": 15,
+            "precision": 0.0,
+            "recall": 0.0,
+            "true_negatives": 0,
+            "true_positives": 0
+          },
+          "runtime": {
+            "median_seconds": 0.00560210004914552,
+            "total_seconds": 0.09202950017061085
+          }
+        },
+        "deny": {
+          "case_count": 17,
+          "metrics": {
+            "accuracy": 1.0,
+            "f1": 1.0,
+            "false_negatives": 0,
+            "false_positives": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "true_negatives": 0,
+            "true_positives": 17
+          },
+          "runtime": {
+            "median_seconds": 0.005186000023968518,
+            "total_seconds": 0.09233370004221797
+          }
+        },
+        "require_sanitizer": {
+          "case_count": 4,
+          "metrics": {
+            "accuracy": 0.75,
+            "f1": 0.8571428571428571,
+            "false_negatives": 0,
+            "false_positives": 1,
+            "precision": 0.75,
+            "recall": 1.0,
+            "true_negatives": 0,
+            "true_positives": 3
+          },
+          "runtime": {
+            "median_seconds": 0.005189550050999969,
+            "total_seconds": 0.0214287000708282
+          }
+        }
+      },
+      "by_category": {
+        "EMAIL": {
+          "case_count": 16,
+          "metrics": {
+            "accuracy": 0.5,
+            "f1": 0.6666666666666666,
+            "false_negatives": 0,
+            "false_positives": 8,
+            "precision": 0.5,
+            "recall": 1.0,
+            "true_negatives": 0,
+            "true_positives": 8
+          },
+          "runtime": {
+            "median_seconds": 0.005191000003833324,
+            "total_seconds": 0.09390500001609325
+          }
+        },
+        "FINANCIAL": {
+          "case_count": 6,
+          "metrics": {
+            "accuracy": 0.3333333333333333,
+            "f1": 0.5,
+            "false_negatives": 0,
+            "false_positives": 4,
+            "precision": 0.3333333333333333,
+            "recall": 1.0,
+            "true_negatives": 0,
+            "true_positives": 2
+          },
+          "runtime": {
+            "median_seconds": 0.006257700035348535,
+            "total_seconds": 0.03686900017783046
+          }
+        },
+        "GOVERNMENT_ID": {
+          "case_count": 3,
+          "metrics": {
+            "accuracy": 0.6666666666666666,
+            "f1": 0.8,
+            "false_negatives": 0,
+            "false_positives": 1,
+            "precision": 0.6666666666666666,
+            "recall": 1.0,
+            "true_negatives": 0,
+            "true_positives": 2
+          },
+          "runtime": {
+            "median_seconds": 0.004903400084003806,
+            "total_seconds": 0.015055600088089705
+          }
+        },
+        "LOCATION": {
+          "case_count": 3,
+          "metrics": {
+            "accuracy": 0.6666666666666666,
+            "f1": 0.8,
+            "false_negatives": 0,
+            "false_positives": 1,
+            "precision": 0.6666666666666666,
+            "recall": 1.0,
+            "true_negatives": 0,
+            "true_positives": 2
+          },
+          "runtime": {
+            "median_seconds": 0.006124199950136244,
+            "total_seconds": 0.019317399943247437
+          }
+        },
+        "MEDICAL": {
+          "case_count": 4,
+          "metrics": {
+            "accuracy": 0.75,
+            "f1": 0.8571428571428571,
+            "false_negatives": 0,
+            "false_positives": 1,
+            "precision": 0.75,
+            "recall": 1.0,
+            "true_negatives": 0,
+            "true_positives": 3
+          },
+          "runtime": {
+            "median_seconds": 0.005263300030492246,
+            "total_seconds": 0.0209264000877738
+          }
+        },
+        "PHONE": {
+          "case_count": 4,
+          "metrics": {
+            "accuracy": 0.75,
+            "f1": 0.8571428571428571,
+            "false_negatives": 0,
+            "false_positives": 1,
+            "precision": 0.75,
+            "recall": 1.0,
+            "true_negatives": 0,
+            "true_positives": 3
+          },
+          "runtime": {
+            "median_seconds": 0.004955400014296174,
+            "total_seconds": 0.01971849997062236
+          }
+        }
+      },
+      "by_partition": {
+        "challenge": {
+          "case_count": 12,
+          "metrics": {
+            "accuracy": 0.5,
+            "f1": 0.6666666666666666,
+            "false_negatives": 0,
+            "false_positives": 6,
+            "precision": 0.5,
+            "recall": 1.0,
+            "true_negatives": 0,
+            "true_positives": 6
+          },
+          "runtime": {
+            "median_seconds": 0.005930449988227338,
+            "total_seconds": 0.07746900001075119
+          }
+        },
+        "in_scope": {
+          "case_count": 24,
+          "metrics": {
+            "accuracy": 0.5833333333333334,
+            "f1": 0.7368421052631579,
+            "false_negatives": 0,
+            "false_positives": 10,
+            "precision": 0.5833333333333334,
+            "recall": 1.0,
+            "true_negatives": 0,
+            "true_positives": 14
+          },
+          "runtime": {
+            "median_seconds": 0.005019499978516251,
+            "total_seconds": 0.12832290027290583
+          }
+        }
+      },
+      "by_provider": {
+        "anthropic": {
+          "case_count": 4,
+          "metrics": {
+            "accuracy": 0.75,
+            "f1": 0.8571428571428571,
+            "false_negatives": 0,
+            "false_positives": 1,
+            "precision": 0.75,
+            "recall": 1.0,
+            "true_negatives": 0,
+            "true_positives": 3
+          },
+          "runtime": {
+            "median_seconds": 0.004955400014296174,
+            "total_seconds": 0.01971849997062236
+          }
+        },
+        "generic": {
+          "case_count": 6,
+          "metrics": {
+            "accuracy": 0.6666666666666666,
+            "f1": 0.8,
+            "false_negatives": 0,
+            "false_positives": 2,
+            "precision": 0.6666666666666666,
+            "recall": 1.0,
+            "true_negatives": 0,
+            "true_positives": 4
+          },
+          "runtime": {
+            "median_seconds": 0.005703000002540648,
+            "total_seconds": 0.03437300003133714
+          }
+        },
+        "local": {
+          "case_count": 4,
+          "metrics": {
+            "accuracy": 0.25,
+            "f1": 0.4,
+            "false_negatives": 0,
+            "false_positives": 3,
+            "precision": 0.25,
+            "recall": 1.0,
+            "true_negatives": 0,
+            "true_positives": 1
+          },
+          "runtime": {
+            "median_seconds": 0.006257700035348535,
+            "total_seconds": 0.024952700128778815
+          }
+        },
+        "openai": {
+          "case_count": 22,
+          "metrics": {
+            "accuracy": 0.5454545454545454,
+            "f1": 0.7058823529411764,
+            "false_negatives": 0,
+            "false_positives": 10,
+            "precision": 0.5454545454545454,
+            "recall": 1.0,
+            "true_negatives": 0,
+            "true_positives": 12
+          },
+          "runtime": {
+            "median_seconds": 0.0052339499816298485,
+            "total_seconds": 0.1267477001529187
+          }
+        }
+      },
+      "by_trust_zone": {
+        "external": {
+          "case_count": 29,
+          "metrics": {
+            "accuracy": 0.5862068965517241,
+            "f1": 0.7391304347826086,
+            "false_negatives": 0,
+            "false_positives": 12,
+            "precision": 0.5862068965517241,
+            "recall": 1.0,
+            "true_negatives": 0,
+            "true_positives": 17
+          },
+          "runtime": {
+            "median_seconds": 0.005036200047470629,
+            "total_seconds": 0.16152180021163076
+          }
+        },
+        "internal": {
+          "case_count": 3,
+          "metrics": {
+            "accuracy": 0.6666666666666666,
+            "f1": 0.8,
+            "false_negatives": 0,
+            "false_positives": 1,
+            "precision": 0.6666666666666666,
+            "recall": 1.0,
+            "true_negatives": 0,
+            "true_positives": 2
+          },
+          "runtime": {
+            "median_seconds": 0.006124199950136244,
+            "total_seconds": 0.019317399943247437
+          }
+        },
+        "local": {
+          "case_count": 4,
+          "metrics": {
+            "accuracy": 0.25,
+            "f1": 0.4,
+            "false_negatives": 0,
+            "false_positives": 3,
+            "precision": 0.25,
+            "recall": 1.0,
+            "true_negatives": 0,
+            "true_positives": 1
+          },
+          "runtime": {
+            "median_seconds": 0.006257700035348535,
+            "total_seconds": 0.024952700128778815
+          }
+        }
+      },
+      "error_count": 0,
+      "false_negative_ids": [],
+      "false_positive_ids": [
+        "policy_challenge_attribute_allowed_029",
+        "policy_challenge_dict_email_allowed_025",
+        "policy_challenge_helper_financial_allowed_default_031",
+        "policy_challenge_local_financial_allowed_035",
+        "policy_challenge_masked_email_default_allow_034",
+        "policy_challenge_request_alias_allowed_027",
+        "policy_in_scope_allow_email_openai_001",
+        "policy_in_scope_allow_financial_local_016",
+        "policy_in_scope_allow_location_internal_018",
+        "policy_in_scope_default_allow_email_002",
+        "policy_in_scope_default_allow_government_generic_013",
+        "policy_in_scope_default_allow_medical_009",
+        "policy_in_scope_default_allow_phone_anthropic_011",
+        "policy_in_scope_first_match_allows_email_020",
+        "policy_in_scope_require_redacted_email_004",
+        "policy_in_scope_wrong_trust_zone_no_match_023"
+      ],
+      "overall": {
+        "case_count": 36,
+        "metrics": {
+          "accuracy": 0.5555555555555556,
+          "f1": 0.7142857142857143,
+          "false_negatives": 0,
+          "false_positives": 16,
+          "precision": 0.5555555555555556,
+          "recall": 1.0,
+          "true_negatives": 0,
+          "true_positives": 20
+        },
+        "runtime": {
+          "median_seconds": 0.005307400017045438,
+          "total_seconds": 0.20579190028365701
+        }
+      },
+      "runtime": {
+        "median_seconds": 0.005307400017045438,
+        "total_seconds": 0.20579190028365701
+      }
+    }
+  }
+}

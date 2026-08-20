@@ -1,0 +1,16 @@
+* text=auto
+
+*.md text eol=lf
+*.py text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.sh text eol=lf
+*.ps1 text eol=crlf
+
+# Historical frozen benchmark hashes are protected in code by explicit newline
+# canonicalization. These attributes keep working-tree checkouts predictable.
+benchmarks/manifest.yaml text eol=crlf
+benchmarks/cases/**/*.py text eol=crlf
+benchmarks/policy_manifest.yml text eol=lf
+benchmarks/policy_cases/** text eol=lf

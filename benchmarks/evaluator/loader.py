@@ -7,6 +7,8 @@ from typing import Literal
 import yaml
 from pydantic import BaseModel, Field, ValidationError, model_validator
 
+from benchmarks.evaluator.hashing import canonical_file_hash, update_with_canonical_file
+
 Partition = Literal["in_scope", "challenge"]
 
 
@@ -74,7 +76,7 @@ def load_manifest(path: Path) -> Manifest:
 
 
 def manifest_hash(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+    return canonical_file_hash(path, "crlf")
 
 
 def benchmark_content_hash(manifest: Manifest, root: Path) -> str:
@@ -84,7 +86,7 @@ def benchmark_content_hash(manifest: Manifest, root: Path) -> str:
         digest.update(case.model_dump_json().encode("utf-8"))
         for file in _case_source_files(case_file_path(root, case)):
             digest.update(file.relative_to(root).as_posix().encode("utf-8"))
-            digest.update(file.read_bytes())
+            update_with_canonical_file(digest, file, "crlf")
     return digest.hexdigest()
 
 

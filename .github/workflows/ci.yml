@@ -24,9 +24,7 @@ jobs:
       - run: uv run python benchmarks/run.py --partition all --system all
       - run: uv run python benchmarks/run_policy.py --system all
       - name: Verify benchmark hashes and metrics
-        run: |
-          uv run python -c "import json; m=json.load(open('benchmarks/results/metrics.json')); meta=m['metadata']; metrics=m['systems']['piiflow']['overall']['metrics']; assert meta['manifest_hash']=='2335f30a119652db32aca3163e4b1a4d91a1e2bb8331cec51d247cd444ee51c7'; assert meta['benchmark_content_hash']=='a34c9817f0da31aaf4bd8a9590796614c62cbf33137b6486c3192d794f361f94'; assert metrics['precision']==0.9545454545454546; assert metrics['recall']==0.84; assert metrics['f1']==0.8936170212765958; assert metrics['accuracy']==0.8888888888888888; assert metrics['true_positives']==42; assert metrics['false_positives']==2; assert metrics['true_negatives']==38; assert metrics['false_negatives']==8"
-          uv run python -c "import json; m=json.load(open('benchmarks/results/phase2b2_policy/metrics.json')); meta=m['metadata']; metrics=m['systems']['piiflow_policy']['overall']['metrics']; assert meta['manifest_hash']=='694cf6af4faa5cf7e002a57d650ee3e6ad7aa1204b9d0db0f2c96edcc20a3511'; assert meta['policy_content_hash']=='be63a102eff6f4c89100221f153f713dda74475662c5783c257d46efd2eddc66'; assert metrics['precision']==1.0; assert metrics['recall']==1.0; assert metrics['f1']==1.0; assert metrics['accuracy']==1.0; assert metrics['true_positives']==20; assert metrics['false_positives']==0; assert metrics['true_negatives']==16; assert metrics['false_negatives']==0"
+        run: uv run python benchmarks/verify_release.py
       - run: uv build
       - name: Wheel smoke test
         run: |
@@ -51,6 +49,9 @@ jobs:
 
   windows-cli-smoke:
     runs-on: windows-latest
+    env:
+      PYTHONUTF8: "1"
+      PYTHONIOENCODING: "utf-8"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -61,9 +62,46 @@ jobs:
       - name: CLI examples
         shell: pwsh
         run: |
-          uv run piiflow scan examples/safe_app
-          uv run piiflow scan examples/vulnerable_app
-          if ($LASTEXITCODE -ne 1) { exit 1 }
-          uv run piiflow scan examples/policy_apps/redacted_email.py --policy examples/policies/sanitized_email.yml
-          uv run piiflow scan examples/policy_apps/wrong_email_sanitizer.py --policy examples/policies/sanitized_email.yml
-          if ($LASTEXITCODE -ne 1) { exit 1 }
+          $PSNativeCommandUseErrorActionPreference = $false
+          $OutputEncoding = [System.Text.UTF8Encoding]::new($false)
+          [Console]::OutputEncoding = [System.Text.UTF8Encoding]::new($false)
+          [Console]::InputEncoding = [System.Text.UTF8Encoding]::new($false)
+
+          function Invoke-ExpectedExit {
+            param(
+              [Parameter(Mandatory = $true)][string] $Name,
+              [Parameter(Mandatory = $true)][int] $ExpectedExitCode,
+              [Parameter(Mandatory = $true)][scriptblock] $Command
+            )
+            & $Command
+            $actual = $LASTEXITCODE
+            if ($null -eq $actual) { $actual = 0 }
+            if ($actual -ne $ExpectedExitCode) {
+              Write-Host "::error title=$Name exit code mismatch::expected $ExpectedExitCode, actual $actual"
+              exit 1
+            }
+            Write-Host "$Name exit code $actual as expected"
+          }
+
+          Invoke-ExpectedExit "safe app" 0 {
+            uv run piiflow scan examples/safe_app
+          }
+          Invoke-ExpectedExit "vulnerable app" 1 {
+            uv run piiflow scan examples/vulnerable_app
+          }
+          Invoke-ExpectedExit "compliant redacted-email policy flow" 0 {
+            uv run piiflow scan examples/policy_apps/redacted_email.py --policy examples/policies/sanitized_email.yml
+          }
+          Invoke-ExpectedExit "wrong-sanitizer policy violation" 1 {
+            uv run piiflow scan examples/policy_apps/wrong_email_sanitizer.py --policy examples/policies/sanitized_email.yml
+          }
+          Invoke-ExpectedExit "local financial allow flow" 0 {
+            uv run piiflow scan examples/policy_apps/local_financial.py --config examples/policy_apps/local_rules.yml --policy examples/policies/local_model.yml
+          }
+
+          $badPolicy = Join-Path $env:RUNNER_TEMP "bad-policy.yml"
+          Set-Content -Path $badPolicy -Encoding utf8 -Value "version: 1`ndefault_action: maybe`nrules: []`n"
+          Invoke-ExpectedExit "malformed policy" 2 {
+            uv run piiflow scan examples/safe_app --policy $badPolicy
+          }
+          exit 0

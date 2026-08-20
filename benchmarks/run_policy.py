@@ -394,10 +394,14 @@ def failures(systems: dict[str, Any], key: str) -> str:
 
 
 def file_hash(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+    from benchmarks.evaluator.hashing import canonical_file_hash
+
+    return canonical_file_hash(path, "lf")
 
 
 def policy_content_hash(root: Path, manifest: PolicyManifest) -> str:
+    from benchmarks.evaluator.hashing import update_with_canonical_file
+
     digest = hashlib.sha256()
     for case in sorted(manifest.cases, key=lambda item: item.id):
         for relative in [case.path, case.policy, case.config]:
@@ -405,7 +409,7 @@ def policy_content_hash(root: Path, manifest: PolicyManifest) -> str:
                 continue
             path = root / relative
             digest.update(relative.encode("utf-8"))
-            digest.update(path.read_bytes())
+            update_with_canonical_file(digest, path, "lf")
     return digest.hexdigest()
 
 

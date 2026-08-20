@@ -51,6 +51,34 @@ def test_valid_manifest_loading_and_hashes(tmp_path: Path) -> None:
     assert benchmark_content_hash(manifest, tmp_path) == benchmark_content_hash(manifest, tmp_path)
 
 
+def test_original_benchmark_hashes_are_stable_across_lf_and_crlf(tmp_path: Path) -> None:
+    case = valid_case()
+    manifest_text = yaml.safe_dump({"version": 1, "cases": [case]}, sort_keys=False)
+    source_text = (
+        "def handle(request, client):\n"
+        '    email = request.json["email"]\n'
+        "    client.responses.create(input=email)\n"
+    )
+
+    roots = []
+    for newline in ["lf", "crlf"]:
+        root = tmp_path / newline
+        cases_dir = root / "cases"
+        cases_dir.mkdir(parents=True)
+        line_ending = "\n" if newline == "lf" else "\r\n"
+        (root / "manifest.yaml").write_bytes(manifest_text.replace("\n", line_ending).encode())
+        (cases_dir / "app.py").write_bytes(source_text.replace("\n", line_ending).encode())
+        roots.append(root)
+
+    lf_manifest = load_manifest(roots[0] / "manifest.yaml")
+    crlf_manifest = load_manifest(roots[1] / "manifest.yaml")
+
+    assert manifest_hash(roots[0] / "manifest.yaml") == manifest_hash(roots[1] / "manifest.yaml")
+    assert benchmark_content_hash(lf_manifest, roots[0]) == benchmark_content_hash(
+        crlf_manifest, roots[1]
+    )
+
+
 def test_duplicate_case_ids_rejected(tmp_path: Path) -> None:
     cases_dir = tmp_path / "cases"
     cases_dir.mkdir()

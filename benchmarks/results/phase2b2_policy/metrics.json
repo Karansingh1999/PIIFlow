@@ -36,8 +36,8 @@
             "true_positives": 0
           },
           "runtime": {
-            "median_seconds": 0.006281099980697036,
-            "total_seconds": 0.10168339998926967
+            "median_seconds": 0.005809799999951792,
+            "total_seconds": 0.09096029999955135
           }
         },
         "deny": {
@@ -53,8 +53,8 @@
             "true_positives": 17
           },
           "runtime": {
-            "median_seconds": 0.006244900054298341,
-            "total_seconds": 0.10757620027288795
+            "median_seconds": 0.005707999999685853,
+            "total_seconds": 0.10046049999982642
           }
         },
         "require_sanitizer": {
@@ -70,8 +70,8 @@
             "true_positives": 3
           },
           "runtime": {
-            "median_seconds": 0.006326549919322133,
-            "total_seconds": 0.027252699830569327
+            "median_seconds": 0.005972700000029363,
+            "total_seconds": 0.02443509999966409
           }
         }
       },
@@ -89,8 +89,8 @@
             "true_positives": 8
           },
           "runtime": {
-            "median_seconds": 0.0062536499463021755,
-            "total_seconds": 0.10172769974451512
+            "median_seconds": 0.005816299999878538,
+            "total_seconds": 0.09327809999922465
           }
         },
         "FINANCIAL": {
@@ -106,8 +106,8 @@
             "true_positives": 2
           },
           "runtime": {
-            "median_seconds": 0.007653850014321506,
-            "total_seconds": 0.04687680001370609
+            "median_seconds": 0.006252399999993941,
+            "total_seconds": 0.03721869999981209
           }
         },
         "GOVERNMENT_ID": {
@@ -123,8 +123,8 @@
             "true_positives": 2
           },
           "runtime": {
-            "median_seconds": 0.006691299960948527,
-            "total_seconds": 0.018864699988625944
+            "median_seconds": 0.005589200000031269,
+            "total_seconds": 0.016361099999812723
           }
         },
         "LOCATION": {
@@ -140,8 +140,8 @@
             "true_positives": 2
           },
           "runtime": {
-            "median_seconds": 0.007507700007408857,
-            "total_seconds": 0.021389900124631822
+            "median_seconds": 0.006611400000110734,
+            "total_seconds": 0.020494899999903282
           }
         },
         "MEDICAL": {
@@ -157,8 +157,8 @@
             "true_positives": 3
           },
           "runtime": {
-            "median_seconds": 0.006067149981390685,
-            "total_seconds": 0.024256400065496564
+            "median_seconds": 0.0058083999999780644,
+            "total_seconds": 0.02293710000003557
           }
         },
         "PHONE": {
@@ -174,8 +174,8 @@
             "true_positives": 3
           },
           "runtime": {
-            "median_seconds": 0.005913300032261759,
-            "total_seconds": 0.023396800155751407
+            "median_seconds": 0.006503050000219446,
+            "total_seconds": 0.025566000000253553
           }
         }
       },
@@ -193,8 +193,8 @@
             "true_positives": 6
           },
           "runtime": {
-            "median_seconds": 0.006587049982044846,
-            "total_seconds": 0.08367799990810454
+            "median_seconds": 0.005680299999767158,
+            "total_seconds": 0.0686718999995719
           }
         },
         "in_scope": {
@@ -210,8 +210,8 @@
             "true_positives": 14
           },
           "runtime": {
-            "median_seconds": 0.006249949976336211,
-            "total_seconds": 0.1528343001846224
+            "median_seconds": 0.005976400000008653,
+            "total_seconds": 0.14718399999946996
           }
         }
       },
@@ -229,8 +229,8 @@
             "true_positives": 3
           },
           "runtime": {
-            "median_seconds": 0.005913300032261759,
-            "total_seconds": 0.023396800155751407
+            "median_seconds": 0.006503050000219446,
+            "total_seconds": 0.025566000000253553
           }
         },
         "generic": {
@@ -246,8 +246,8 @@
             "true_positives": 4
           },
           "runtime": {
-            "median_seconds": 0.0067044999450445175,
-            "total_seconds": 0.040254600113257766
+            "median_seconds": 0.005855399999973088,
+            "total_seconds": 0.036855999999716005
           }
         },
         "local": {
@@ -263,8 +263,8 @@
             "true_positives": 1
           },
           "runtime": {
-            "median_seconds": 0.007900800032075495,
-            "total_seconds": 0.032553200027905405
+            "median_seconds": 0.006505150000066351,
+            "total_seconds": 0.026075499999933527
           }
         },
         "openai": {
@@ -280,8 +280,8 @@
             "true_positives": 12
           },
           "runtime": {
-            "median_seconds": 0.0062536499463021755,
-            "total_seconds": 0.14030769979581237
+            "median_seconds": 0.005788399999801186,
+            "total_seconds": 0.12735839999913878
           }
         }
       },
@@ -299,8 +299,8 @@
             "true_positives": 17
           },
           "runtime": {
-            "median_seconds": 0.006244900054298341,
-            "total_seconds": 0.18256919994018972
+            "median_seconds": 0.005707999999685853,
+            "total_seconds": 0.16928549999920506
           }
         },
         "internal": {
@@ -316,8 +316,8 @@
             "true_positives": 2
           },
           "runtime": {
-            "median_seconds": 0.007507700007408857,
-            "total_seconds": 0.021389900124631822
+            "median_seconds": 0.006611400000110734,
+            "total_seconds": 0.020494899999903282
           }
         },
         "local": {
@@ -333,8 +333,8 @@
             "true_positives": 1
           },
           "runtime": {
-            "median_seconds": 0.007900800032075495,
-            "total_seconds": 0.032553200027905405
+            "median_seconds": 0.006505150000066351,
+            "total_seconds": 0.026075499999933527
           }
         }
       },
@@ -354,13 +354,13 @@
           "true_positives": 20
         },
         "runtime": {
-          "median_seconds": 0.0062752499943599105,
-          "total_seconds": 0.23651230009272695
+          "median_seconds": 0.005870349999895552,
+          "total_seconds": 0.21585589999904187
         }
       },
       "runtime": {
-        "median_seconds": 0.0062752499943599105,
-        "total_seconds": 0.23651230009272695
+        "median_seconds": 0.005870349999895552,
+        "total_seconds": 0.21585589999904187
       }
     },
     "policy_blind": {
@@ -378,8 +378,8 @@
             "true_positives": 0
           },
           "runtime": {
-            "median_seconds": 0.00560210004914552,
-            "total_seconds": 0.09202950017061085
+            "median_seconds": 0.005165900000065449,
+            "total_seconds": 0.08442990000003192
           }
         },
         "deny": {
@@ -395,8 +395,8 @@
             "true_positives": 17
           },
           "runtime": {
-            "median_seconds": 0.005186000023968518,
-            "total_seconds": 0.09233370004221797
+            "median_seconds": 0.004872299999988172,
+            "total_seconds": 0.08526199999823803
           }
         },
         "require_sanitizer": {
@@ -412,8 +412,8 @@
             "true_positives": 3
           },
           "runtime": {
-            "median_seconds": 0.005189550050999969,
-            "total_seconds": 0.0214287000708282
+            "median_seconds": 0.004810050000060073,
+            "total_seconds": 0.019871700000294368
           }
         }
       },
@@ -431,8 +431,8 @@
             "true_positives": 8
           },
           "runtime": {
-            "median_seconds": 0.005191000003833324,
-            "total_seconds": 0.09390500001609325
+            "median_seconds": 0.004803349999747297,
+            "total_seconds": 0.08558189999894239
           }
         },
         "FINANCIAL": {
@@ -448,8 +448,8 @@
             "true_positives": 2
           },
           "runtime": {
-            "median_seconds": 0.006257700035348535,
-            "total_seconds": 0.03686900017783046
+            "median_seconds": 0.005495549999977811,
+            "total_seconds": 0.03290149999975256
           }
         },
         "GOVERNMENT_ID": {
@@ -465,8 +465,8 @@
             "true_positives": 2
           },
           "runtime": {
-            "median_seconds": 0.004903400084003806,
-            "total_seconds": 0.015055600088089705
+            "median_seconds": 0.004696699999840348,
+            "total_seconds": 0.014087800000197603
           }
         },
         "LOCATION": {
@@ -482,8 +482,8 @@
             "true_positives": 2
           },
           "runtime": {
-            "median_seconds": 0.006124199950136244,
-            "total_seconds": 0.019317399943247437
+            "median_seconds": 0.005679800000052637,
+            "total_seconds": 0.01710819999971136
           }
         },
         "MEDICAL": {
@@ -499,8 +499,8 @@
             "true_positives": 3
           },
           "runtime": {
-            "median_seconds": 0.005263300030492246,
-            "total_seconds": 0.0209264000877738
+            "median_seconds": 0.005058550000057949,
+            "total_seconds": 0.020106899999973393
           }
         },
         "PHONE": {
@@ -516,8 +516,8 @@
             "true_positives": 3
           },
           "runtime": {
-            "median_seconds": 0.004955400014296174,
-            "total_seconds": 0.01971849997062236
+            "median_seconds": 0.004790899999989051,
+            "total_seconds": 0.019777299999987008
           }
         }
       },
@@ -535,8 +535,8 @@
             "true_positives": 6
           },
           "runtime": {
-            "median_seconds": 0.005930449988227338,
-            "total_seconds": 0.07746900001075119
+            "median_seconds": 0.00531749999981912,
+            "total_seconds": 0.06981339999856573
           }
         },
         "in_scope": {
@@ -552,8 +552,8 @@
             "true_positives": 14
           },
           "runtime": {
-            "median_seconds": 0.005019499978516251,
-            "total_seconds": 0.12832290027290583
+            "median_seconds": 0.004810050000060073,
+            "total_seconds": 0.11975019999999859
           }
         }
       },
@@ -571,8 +571,8 @@
             "true_positives": 3
           },
           "runtime": {
-            "median_seconds": 0.004955400014296174,
-            "total_seconds": 0.01971849997062236
+            "median_seconds": 0.004790899999989051,
+            "total_seconds": 0.019777299999987008
           }
         },
         "generic": {
@@ -588,8 +588,8 @@
             "true_positives": 4
           },
           "runtime": {
-            "median_seconds": 0.005703000002540648,
-            "total_seconds": 0.03437300003133714
+            "median_seconds": 0.00518499999998312,
+            "total_seconds": 0.031195999999908963
           }
         },
         "local": {
@@ -605,8 +605,8 @@
             "true_positives": 1
           },
           "runtime": {
-            "median_seconds": 0.006257700035348535,
-            "total_seconds": 0.024952700128778815
+            "median_seconds": 0.005558300000075178,
+            "total_seconds": 0.02221430000008695
           }
         },
         "openai": {
@@ -622,8 +622,8 @@
             "true_positives": 12
           },
           "runtime": {
-            "median_seconds": 0.0052339499816298485,
-            "total_seconds": 0.1267477001529187
+            "median_seconds": 0.004923850000068342,
+            "total_seconds": 0.11637599999858139
           }
         }
       },
@@ -641,8 +641,8 @@
             "true_positives": 17
           },
           "runtime": {
-            "median_seconds": 0.005036200047470629,
-            "total_seconds": 0.16152180021163076
+            "median_seconds": 0.004823699999633391,
+            "total_seconds": 0.150241099998766
           }
         },
         "internal": {
@@ -658,8 +658,8 @@
             "true_positives": 2
           },
           "runtime": {
-            "median_seconds": 0.006124199950136244,
-            "total_seconds": 0.019317399943247437
+            "median_seconds": 0.005679800000052637,
+            "total_seconds": 0.01710819999971136
           }
         },
         "local": {
@@ -675,8 +675,8 @@
             "true_positives": 1
           },
           "runtime": {
-            "median_seconds": 0.006257700035348535,
-            "total_seconds": 0.024952700128778815
+            "median_seconds": 0.005558300000075178,
+            "total_seconds": 0.02221430000008695
           }
         }
       },
@@ -713,13 +713,13 @@
           "true_positives": 20
         },
         "runtime": {
-          "median_seconds": 0.005307400017045438,
-          "total_seconds": 0.20579190028365701
+          "median_seconds": 0.005047999999987951,
+          "total_seconds": 0.1895635999985643
         }
       },
       "runtime": {
-        "median_seconds": 0.005307400017045438,
-        "total_seconds": 0.20579190028365701
+        "median_seconds": 0.005047999999987951,
+        "total_seconds": 0.1895635999985643
       }
     }
   }

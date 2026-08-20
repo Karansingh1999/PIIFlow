@@ -361,10 +361,10 @@ PIIFlow-Bench measures case-level privacy-flow detection on synthetic Python LLM
 
 | System | Mean seconds | Median seconds | P95 seconds | Total seconds |
 |---|---:|---:|---:|---:|
-| direct | 0.008 | 0.008 | 0.012 | 0.749 |
-| lexical | 0.004 | 0.004 | 0.005 | 0.385 |
-| piiflow | 0.005 | 0.005 | 0.006 | 0.474 |
-| piiflow_legacy | 0.005 | 0.005 | 0.007 | 0.493 |
+| direct | 0.008 | 0.007 | 0.011 | 0.694 |
+| lexical | 0.004 | 0.004 | 0.005 | 0.356 |
+| piiflow | 0.005 | 0.005 | 0.006 | 0.443 |
+| piiflow_legacy | 0.005 | 0.005 | 0.006 | 0.454 |
 
 ## Interpretation
 

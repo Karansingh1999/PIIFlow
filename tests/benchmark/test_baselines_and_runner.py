@@ -12,7 +12,10 @@ from benchmarks.evaluator.loader import load_manifest
 from benchmarks.evaluator.reporting import render_markdown_report
 from benchmarks.evaluator.runner import build_systems, evaluate, select_cases
 from benchmarks.run import main
+from benchmarks.run_policy import file_hash as policy_file_hash
+from benchmarks.run_policy import load_manifest as load_policy_manifest
 from benchmarks.run_policy import main as policy_main
+from benchmarks.run_policy import policy_content_hash
 
 
 def test_lexical_baseline_flags_cooccurrence(tmp_path: Path) -> None:
@@ -148,6 +151,62 @@ def test_policy_benchmark_smoke(tmp_path: Path) -> None:
     assert exit_code == 0
     assert len(records) == 8
     assert metrics["metadata"]["systems"] == ["piiflow_policy", "policy_blind"]
+
+
+def test_policy_benchmark_hashes_are_stable_across_lf_and_crlf(tmp_path: Path) -> None:
+    manifest_text = """
+version: 1
+cases:
+  - id: policy_case_001
+    path: policy_cases/apps/app.py
+    policy: policy_cases/policies/policy.yml
+    partition: in_scope
+    family: direct
+    description: Email to OpenAI is denied.
+    expected:
+      status: violation
+      categories: [EMAIL]
+      action: deny
+      provider: openai
+      trust_zone: external
+    tags: [email, openai]
+""".lstrip()
+    source_text = (
+        "def handle(request, client):\n"
+        '    email = request.json["email"]\n'
+        "    client.responses.create(input=email)\n"
+    )
+    policy_text = """
+version: 1
+default_action: deny
+rules: []
+""".lstrip()
+
+    roots = []
+    for newline in ["lf", "crlf"]:
+        root = tmp_path / newline
+        app_dir = root / "policy_cases" / "apps"
+        policy_dir = root / "policy_cases" / "policies"
+        app_dir.mkdir(parents=True)
+        policy_dir.mkdir(parents=True)
+        line_ending = "\n" if newline == "lf" else "\r\n"
+        (root / "policy_manifest.yml").write_bytes(
+            manifest_text.replace("\n", line_ending).encode()
+        )
+        (app_dir / "app.py").write_bytes(source_text.replace("\n", line_ending).encode())
+        (policy_dir / "policy.yml").write_bytes(policy_text.replace("\n", line_ending).encode())
+        roots.append(root)
+
+    lf_manifest = load_policy_manifest(roots[0] / "policy_manifest.yml")
+    crlf_manifest = load_policy_manifest(roots[1] / "policy_manifest.yml")
+
+    assert policy_file_hash(roots[0] / "policy_manifest.yml") == policy_file_hash(
+        roots[1] / "policy_manifest.yml"
+    )
+    assert policy_content_hash(roots[0], lf_manifest) == policy_content_hash(
+        roots[1],
+        crlf_manifest,
+    )
 
 
 def test_production_code_has_no_benchmark_specific_references() -> None:

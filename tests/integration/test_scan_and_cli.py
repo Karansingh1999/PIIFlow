@@ -1,5 +1,6 @@
 from pathlib import Path
 
+import pytest
 from typer.testing import CliRunner
 
 from piiflow.cli import app
@@ -425,3 +426,36 @@ def test_example_policies_cover_documented_cli_scenarios() -> None:
         completed = runner.invoke(app, args)
         assert completed.exit_code == exit_code
         assert expected in completed.stdout
+
+
+@pytest.mark.live
+def test_orcarouter_models_live_through_provider_path() -> None:
+    """Opt-in live check (ORCAROUTER_LIVE=1): real catalog and inference via provider code."""
+    import os
+
+    if os.environ.get("ORCAROUTER_LIVE") != "1":
+        pytest.skip("set ORCAROUTER_LIVE=1 to run the OrcaRouter live check")
+    from piiflow.integrations import orcarouter
+
+    key = os.environ.get("ORCAROUTER_API_KEY") or os.environ.get("ORCA_KEY") or ""
+    if not key.startswith(orcarouter.KEY_PREFIX):
+        pytest.skip("ORCAROUTER_API_KEY is not set")
+    credential = orcarouter.OrcaRouterKeyAdapter().credential_from_input(key)
+    transport = orcarouter.UrlLibTransport()
+    catalog = orcarouter.fetch_catalog(transport, credential)
+    assert catalog.source == "live"
+    assert orcarouter.resolve_api_base_url() == orcarouter.DEFAULT_API_BASE_URL
+    chat_models = {model.id for model in catalog.chat_models()}
+    assert "orcarouter/auto" in chat_models or chat_models
+    assert not chat_models & {"google/imagen", "jina/rerank"}
+    assert len(catalog.models) <= orcarouter.MAX_CATALOG_ITEMS
+    cyber = sorted(model for model in chat_models if model.startswith("orcacyber-"))
+    model_id = cyber[0] if cyber else "deepseek/deepseek-v4.1-flash"
+    reply = orcarouter.request_chat_completion(
+        transport,
+        credential,
+        model=model_id,
+        messages=[{"role": "user", "content": "Reply with the single word: ok"}],
+    )
+    assert reply.get("choices")
+    assert credential.key not in str(reply)

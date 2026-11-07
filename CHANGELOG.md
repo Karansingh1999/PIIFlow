@@ -3,6 +3,17 @@
 All notable changes to PIIFlow are documented here. Dates are marked
 `Unreleased` where no verified public release date exists.
 
+## [Unreleased]
+
+### Added
+
+- OrcaRouter Cyber Inference named provider: `piiflow scan --rule-provider
+  orcarouter` rule set and `providers: [orcarouter]` policy identity.
+- `piiflow orcarouter login` (API key or OAuth 2.0 + PKCE, S256) and
+  `piiflow orcarouter models` with capability-filtered live catalog discovery,
+  bounded verified seed fallback, and `ORCA_BASE_URL` / `ORCA_AUTH_BASE_URL` /
+  `ORCA_API_BASE_URL` configuration.
+
 ## [0.3.0] - Unreleased
 
 ### Added

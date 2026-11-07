@@ -6,7 +6,7 @@ from collections import Counter
 from pathlib import Path
 
 from piiflow import __version__
-from piiflow.config import load_config
+from piiflow.config import load_config, load_provider_config
 from piiflow.indexing import collect_functions, collect_import_aliases
 from piiflow.models import AnalysisOptions, FunctionInfo, ParseError, ScanResult, ScanSummary
 from piiflow.propagation import PropagationAnalyzer
@@ -38,8 +38,13 @@ def scan_path(
     config_path: Path | None = None,
     excludes: tuple[str, ...] = (),
     options: AnalysisOptions | None = None,
+    rule_provider: str | None = None,
 ) -> ScanResult:
-    config = load_config(config_path)
+    config = (
+        load_provider_config(rule_provider, config_path)
+        if rule_provider
+        else load_config(config_path)
+    )
     root, files = discover_python_files(path, excludes)
     trees: dict[Path, ast.AST] = {}
     parse_errors: list[ParseError] = []

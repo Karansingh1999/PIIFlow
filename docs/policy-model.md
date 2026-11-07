@@ -51,8 +51,12 @@ Built-in sinks carry metadata:
 Custom sinks may define `provider` and `trust_zone`. Older custom sink rules that omit
 metadata default conservatively to `generic` and `external`.
 
-Supported identities include `openai`, `anthropic`, `generic`, and `local`. Supported
-trust zones include `external`, `internal`, and `local`.
+With `piiflow scan --rule-provider orcarouter`, OpenAI Responses/Chat Completions and
+Anthropic Messages sinks are reported with `provider=orcarouter` instead, so OrcaRouter
+Cyber Inference flows can be governed separately from direct vendor SDK calls.
+
+Supported identities include `openai`, `anthropic`, `orcarouter`, `generic`, and `local`.
+Supported trust zones include `external`, `internal`, and `local`.
 
 ## Sanitizer Evidence
 

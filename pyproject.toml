@@ -98,4 +98,7 @@ exclude = ["benchmarks/cases", "benchmarks/policy_cases"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-ra"
+markers = [
+  "live: opt-in OrcaRouter live provider check (ORCAROUTER_LIVE=1)",
+]
 pythonpath = ["src", "."]

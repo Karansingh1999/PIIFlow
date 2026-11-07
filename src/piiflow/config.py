@@ -32,13 +32,37 @@ def _load_yaml(path: Path) -> dict[str, Any]:
     return loaded
 
 
-def _default_data() -> dict[str, Any]:
-    default = resources.files("piiflow").joinpath("rules/default.yaml")
-    with default.open("r", encoding="utf-8") as handle:
-        loaded = yaml.safe_load(handle)
+# OrcaRouter Cyber Inference provider: Open- and Anthropic-wire sink identities are
+# attributed to the named provider so policies can target `providers: [orcarouter]`.
+ORCAROUTER_PROVIDER = "orcarouter"
+PROVIDER_RULE_SETS: dict[str, tuple[str, ...]] = {
+    ORCAROUTER_PROVIDER: ("rules/default.yaml",),
+}
+
+
+def _resource_yaml(relative: str) -> dict[str, Any]:
+    resource = resources.files("piiflow").joinpath(relative)
+    loaded = yaml.safe_load(resource.read_text(encoding="utf-8"))
     if not isinstance(loaded, dict):
-        raise ConfigError("Packaged default configuration is invalid")
+        msg = f"Packaged rule configuration {relative} is invalid"
+        raise ConfigError(msg)
     return loaded
+
+
+def _default_data() -> dict[str, Any]:
+    return _resource_yaml("rules/default.yaml")
+
+
+def _provider_data(provider: str) -> dict[str, Any]:
+    data = _default_data()
+    if provider == ORCAROUTER_PROVIDER:
+        data["sink_patterns"] = [
+            {**rule, "provider": ORCAROUTER_PROVIDER}
+            if rule.get("provider") in {"openai", "anthropic"}
+            else rule
+            for rule in data["sink_patterns"]
+        ]
+    return data
 
 
 def _merge_config(base: dict[str, Any], overlay: dict[str, Any]) -> dict[str, Any]:
@@ -58,7 +82,24 @@ def _merge_config(base: dict[str, Any], overlay: dict[str, Any]) -> dict[str, An
 
 
 def load_config(path: Path | None = None) -> RuleConfig:
-    data = _default_data()
+    return _load_data(path)
+
+
+def load_provider_config(provider: str, path: Path | None = None) -> RuleConfig:
+    """Load the packaged rule set of a named provider instead of the built-in defaults.
+
+    User overlays merge exactly as with :func:`load_config`, so custom rules keep
+    extending the provider rules and policy identities stay plain provider strings.
+    """
+    if provider not in PROVIDER_RULE_SETS:
+        known = ", ".join(sorted(PROVIDER_RULE_SETS))
+        msg = f"Unknown rule provider {provider!r}. Available providers: {known}"
+        raise ConfigError(msg)
+    return _load_data(path, base=_provider_data(provider))
+
+
+def _load_data(path: Path | None, base: dict[str, Any] | None = None) -> RuleConfig:
+    data = _default_data() if base is None else dict(base)
     if path is not None:
         data = _merge_config(data, _load_yaml(path))
     try:

@@ -182,6 +182,9 @@ Options:
 - `--format text|json`: choose output format. Default: `text`.
 - `--output PATH`: write the rendered report to a file.
 - `--policy PATH`: evaluate detected flows against a YAML privacy policy.
+- `--rule-provider orcarouter`: attribute OpenAI- and Anthropic-wire sinks to the
+  named [OrcaRouter](https://www.orcarouter.ai) Cyber Inference provider so
+  policies can use `providers: [orcarouter]`.
 - `--fail-on none|low|medium|high|critical`: set the failing severity
   threshold. Default: `high`.
 - `--exclude PATTERN`: skip paths by glob. May be repeated.
@@ -251,10 +254,42 @@ Built-in sink metadata:
 | --- | --- | --- |
 | OpenAI Responses and Chat Completions | `openai` | `external` |
 | Anthropic Messages | `anthropic` | `external` |
+| OrcaRouter Cyber Inference (`--rule-provider orcarouter`) | `orcarouter` | `external` |
 | Generic `*.invoke` sinks | `generic` | `external` |
 
 Custom sink rules may override `provider` and `trust_zone`. The examples also
 show `local/local` and `generic/internal` configurations.
+
+## OrcaRouter Cyber Inference Provider
+
+[OrcaRouter Cyber Inference](https://www.orcarouter.ai/cyber) is a named, scoped
+provider for security teams doing authorized work: red teams reach the cyber
+models on the same endpoint ([cyber model catalog](https://www.orcarouter.ai/models?tier=cyber))
+and blue teams keep gateway-side controls on every call. PIIFlow uses it in two ways:
+
+1. **Sink identity.** `piiflow scan --rule-provider orcarouter` reports
+   OpenAI- and Anthropic-wire calls as `provider: orcarouter`, so a policy can
+   allow, deny, or require sanitizers for OrcaRouter flows separately from direct
+   vendor SDK calls.
+2. **Model selection for consolidating LLM calls.** Query the live catalog with
+   a key from the OrcaRouter console or `piiflow orcarouter login`:
+
+   ```bash
+   export ORCA_KEY=sk-orca-...   # your own key; never commit it
+   piiflow orcarouter login --key-stdin < key.txt   # or: piiflow orcarouter login (OAuth + PKCE)
+   piiflow orcarouter models                  # chat-capable models, live catalog
+   piiflow orcarouter models --modality image # fail-closed multimodal filter
+   ```
+
+   The default model is `orcarouter/auto`. Dedicated cyber models such as
+   `orcacyber-ultra-1.0` and `orcacyber-zero-1.5` are offered to security teams
+   verified for that tier; `orcarouter/fusion` is the general fallback.
+
+Inference and model discovery use `https://api.orcarouter.ai/v1`; login and key
+exchange use `https://www.orcarouter.ai` (`/auth`, `/api/v1/auth/keys`). Set
+`ORCA_BASE_URL` for a self-hosted deployment, or `ORCA_AUTH_BASE_URL` and
+`ORCA_API_BASE_URL` to override each origin separately. PIIFlow never calls a
+model during a scan.
 
 ## Benchmarks
 
